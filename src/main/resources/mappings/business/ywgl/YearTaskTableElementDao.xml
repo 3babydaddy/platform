@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.business.ywgl.dao.YearTaskTableElementDao">
+ 
+  <sql id="Base_Column_List">
+    
+    ID, DATA_ID, COLUMN_NUM, SORT, TASK_YEAR, TARGET_TASK, LEAD_OFFICE_IDS, DUTY_OFFICE_IDS, 
+    CHARGE_OFFICE_IDS, TASK_STATE, TASK_QUARTER, TASK_EXECUTION, TASK_PLAN, CREATE_BY, 
+    CREATE_DATE, UPDATE_BY, UPDATE_DATE, REMARKS, DEL_FLAG
+  </sql>
+  <select id="get" resultType="YearTaskTableElement" >
+    
+    select 
+    <include refid="Base_Column_List" />
+    from ywgl_year_task_element
+    where ID = #{id,jdbcType=VARCHAR}
+    and DEL_FLAG='0'
+  </select>
+  <select id="findList" resultType="YearTaskTableElement" >
+    
+    select 
+    <include refid="Base_Column_List" />
+    from ywgl_year_task_element
+    where ID = #{id,jdbcType=VARCHAR}
+    and DEL_FLAG='0'
+  </select>
+ <select id="findListByDataId" resultType="YearTaskTableElement" >
+    select 
+    <include refid="Base_Column_List" />
+    from ywgl_year_task_element
+    where DATA_ID = #{dataId,jdbcType=VARCHAR}
+    and DEL_FLAG='0'
+  </select>
+  <insert id="insert" >
+    
+    insert into ywgl_year_task_element
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="dataId != null">
+        DATA_ID,
+      </if>
+      <if test="columnNum != null">
+        COLUMN_NUM,
+      </if>
+      <if test="sort != null">
+        SORT,
+      </if>
+      <if test="taskYear != null">
+        TASK_YEAR,
+      </if>
+      <if test="targetTask != null">
+        TARGET_TASK,
+      </if>
+      <if test="leadOfficeIds != null">
+        LEAD_OFFICE_IDS,
+      </if>
+      <if test="dutyOfficeIds != null">
+        DUTY_OFFICE_IDS,
+      </if>
+      <if test="chargeOfficeIds != null">
+        CHARGE_OFFICE_IDS,
+      </if>
+      <if test="taskState != null">
+        TASK_STATE,
+      </if>
+      <if test="taskQuarter != null">
+        TASK_QUARTER,
+      </if>
+      <if test="taskExecution != null">
+        TASK_EXECUTION,
+      </if>
+      <if test="taskPlan != null">
+        TASK_PLAN,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dataId != null">
+        #{dataId,jdbcType=VARCHAR},
+      </if>
+      <if test="columnNum != null">
+        #{columnNum,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="taskYear != null">
+        #{taskYear,jdbcType=VARCHAR},
+      </if>
+      <if test="targetTask != null">
+        #{targetTask,jdbcType=VARCHAR},
+      </if>
+      <if test="leadOfficeIds != null">
+        #{leadOfficeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyOfficeIds != null">
+        #{dutyOfficeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeOfficeIds != null">
+        #{chargeOfficeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="taskState != null">
+        #{taskState,jdbcType=VARCHAR},
+      </if>
+      <if test="taskQuarter != null">
+        #{taskQuarter,jdbcType=VARCHAR},
+      </if>
+      <if test="taskExecution != null">
+        #{taskExecution,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPlan != null">
+        #{taskPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" >
+    
+    update ywgl_year_task_element
+    <set>
+      <if test="dataId != null">
+        DATA_ID = #{dataId,jdbcType=VARCHAR},
+      </if>
+      <if test="columnNum != null">
+        COLUMN_NUM = #{columnNum,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        SORT = #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="taskYear != null">
+        TASK_YEAR = #{taskYear,jdbcType=VARCHAR},
+      </if>
+      <if test="targetTask != null">
+        TARGET_TASK = #{targetTask,jdbcType=VARCHAR},
+      </if>
+      <if test="leadOfficeIds != null">
+        LEAD_OFFICE_IDS = #{leadOfficeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyOfficeIds != null">
+        DUTY_OFFICE_IDS = #{dutyOfficeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeOfficeIds != null">
+        CHARGE_OFFICE_IDS = #{chargeOfficeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="taskState != null">
+        TASK_STATE = #{taskState,jdbcType=VARCHAR},
+      </if>
+      <if test="taskQuarter != null">
+        TASK_QUARTER = #{taskQuarter,jdbcType=VARCHAR},
+      </if>
+      <if test="taskExecution != null">
+        TASK_EXECUTION = #{taskExecution,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPlan != null">
+        TASK_PLAN = #{taskPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="delete" >
+    
+    update ywgl_year_task_element
+    <set>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+        DEL_FLAG = '1'
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="deleteByDataId" >
+    
+    update ywgl_year_task_element
+    <set>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+        DEL_FLAG = '1'
+    </set>
+    where DATA_ID = #{dataId,jdbcType=VARCHAR}
+  </update>
+</mapper>

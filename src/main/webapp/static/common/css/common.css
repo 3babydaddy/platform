@@ -1,0 +1,552 @@
+/*公共样式*/
+*{
+	margin:0;
+	padding:0;
+}
+a{
+	text-decoration: none;
+	outline: none;
+}
+body{
+	font-family: Microsoft YaHei!important;
+	font-size: 14px;
+}
+ul>li{
+	list-style: none;
+}
+.headTop{
+	width: 100%;
+	height: 35px;
+	background-color: #dff1fb;
+}
+.bannerTop{
+	background-image: url(../image/head_banner.png);
+	background-repeat: no-repeat;
+	/*background-position: 50% 0;*/
+	width: 100%;
+	height: 68px;
+/*	margin-right: -50%;
+	position: relative;
+	display: block;*/
+}
+.fixed-table-container tbody td{
+	position: static;
+}
+
+/* 表格不出纵向滚动条 */
+.btn{
+    padding: 4px 12px!important;
+    line-height: 16px;
+/*     background-color:#f2f2f2\9; */
+}
+.contList .btn-group{
+	height: auto;
+}
+.ryxxFormTool{/*人物管理表单工具栏*/
+	margin-left:20px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.ryxxFormTool input{/*保存按钮样式*/
+	padding:3px 10px;
+}
+/*公共样式*/
+/*first人物管理样式*/
+.toolBar{
+	width: 100%;
+	height: 40px;
+	line-height:40px;
+	background-repeat: repeat-x;
+	/* padding-top: 5px; */
+	padding-bottom: 5px;
+}
+.toolBar .btn-group{
+	line-height: 30px;
+}
+.toolBar .btn-group a{
+/* 	height: 15px; */
+/* 	line-height: 15px; */
+}
+.toolBar .btn .caret{
+	margin-top: 6px;
+}
+.searchForm{
+	width: 100%;
+	height: 130px;
+}
+.searchTj{
+	display: inline-block;
+	margin-bottom: 0;
+	height: 87px;
+	vertical-align: top;
+}
+.searchP1{
+	width: 100%;
+	margin-bottom: 0;
+	height: 43px;
+	line-height: 43px;
+	margin-left: 10px;
+}
+.searchP1 label{
+	margin-bottom: 0;
+	width: auto;
+	display: inline-block;
+}
+.searchP1 input,.searchP1 select{
+	width: 98px;
+	height: 25px;
+	display: inline-block;
+	margin:0 10px;
+	padding:0;
+}
+.searchP1 .agefw{
+	width:43px;
+}
+.keep-open i{
+	font-style: normal;
+}
+.fixed-table-toolbar .columns{
+	line-height: 30px;
+	margin: 5px 0;
+}
+#gcys,#kxys{/*工程院院士和科学院院士两字段checkbox样式*/
+	width:auto;
+}
+	/*人物管理综合情况*/
+    .Jl{
+      overflow:hidden;
+    }
+    #JlTit{
+      border: 2px solid #000;
+      border-right: none;
+      float: left;
+      min-height: 45px;
+      width: 66px;
+      text-align: center;
+      margin-left:10px;
+      border-bottom: 1px solid;
+    }
+    #JcTit,#pxTit,#ShzwTit,#XxjlTit,#GzjlTit{
+      border-left: 2px solid #000;
+      float: left;
+      min-height: 45px;
+      width: 66px;
+      text-align: center;
+      margin-left:10px;
+      border-bottom: 1px solid;
+    }
+    #JcTit,#pxTit{
+      min-height: 83px;
+      border-top: none;
+    }
+    .JlTitCon,.JcTitCon,.pxTitCon,.ShzwTitCon,.XxjlTitCon,.GzjlTitCon{
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    #para_table{
+    	width:762px;
+    	margin-left:0;
+    	float:left;
+    	border-left:1px solid #000;
+    	table-layout:fixed;
+   	    border-bottom: 1px solid;
+    }
+    #jcqk_table,#pxqk_table,#shzw_table,#xxjl_table,#gzjl_table{
+    	width: 762px;
+    	margin-left:0;
+    	float:left;
+    	border-left:1px solid #000;
+        border-bottom: 1px solid;
+ 	    border-top: none;
+    }
+    #para_table td,#jcqk_table td,#pxqk_table td,#shzw_table td,#xxjl_table td,#gzjl_table td{
+    	text-align:center;
+ 	    border-top: none;
+    }
+    .Jltishi{
+    	float:left;
+    	width:235px;
+    	height:auto;
+    	padding-left:10px;
+    }
+    .Jltb{
+    	width:591px!important;
+    	float:left;
+    	border-top: none!important;
+    }
+    .Jltb td{
+    	height:auto!important;
+    	line-height:25px;
+    	border-top: none!important;
+    }
+    .Jltb td textarea{
+    	max-width: 99%!important;
+		max-height: 1000px!important;
+		width: 99%!important;
+		height: 99%!important;
+    }
+    .validateTx{
+        border: 2px solid red!important;
+    }
+	/*人物管理综合情况*/
+
+/*first人物管理样式*/
+/*second政协安排*/
+.meetingCon{
+	height: 100%;
+}
+.meetingCon table{
+	width: 100%;
+	border-collapse: collapse;
+}
+.meetingCon table td{
+/* 	border: 1px solid #ccc; */
+	vertical-align: top;
+	background-color: #fff;
+}
+.meetingListCon{
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+.meetingListTop{
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+	border-bottom: 1px solid #ddd;
+}
+.meetingListTop span,.meetingListTit span{
+    margin-left: 7px;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: "Microsoft Yahei";
+    color: #2fa4e7;
+}
+.meetingListTit{
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #ccc;
+}
+.leftArg {
+	height:100%;
+}
+
+.rightArg table{
+	border-collapse: separate;
+	border-spacing: 10px;
+}
+.rightArg table td{
+	border:none;
+}
+.meetingDetail-lt,.meetingDetail-rt,.meetingDetail-lb,.meetingDetail-rb{
+	width: auto;
+	height: auto;
+	display: inline-block;
+	min-width: 200px;
+}
+.meetingDetail{
+	table-layout: fixed;
+}
+.meetingDetail td{
+	display: inline-block;
+	margin-right: 10px;
+	width: auto!important;
+}
+.meetingDetail-lt{
+	border:1px solid #a9b3bd;
+}
+.meetingDetail-rt{
+	border:1px solid #d0aaa9;
+}
+.meetingDetail-lb{
+	border:1px solid #a48d6e;
+}
+.meetingDetail-rb{
+	border:1px solid #8a83a4;
+}
+.lt-tit{
+	border-bottom: 1px solid #a9b3bd;
+	margin-bottom: 10px;
+}
+.rt-tit{
+	border-bottom: 1px solid #d0aaa9;
+	margin-bottom: 10px;
+}
+.lb-tit{
+	border-bottom: 1px solid #a48d6e;
+	margin-bottom: 10px;
+}
+.rb-tit{
+	border-bottom: 1px solid #8a83a4;
+	margin-bottom: 10px;
+}
+.lt-con{
+	padding: 0 10px;
+}
+.meetingDetail ul li{
+	list-style: disc;
+}
+/*second政协安排*/
+/*third新增表格样式*/
+#addTab{
+	border: 1px solid #dd2014;
+	margin-top: 5px;
+}
+#addTab li{
+	cursor: pointer;
+}
+.FormCon>div{
+	display: none;
+	margin-left: 10px;
+	padding-top: 10px;
+}
+.FormCon table{
+	text-align: center;
+	margin-left: 10px;
+    table-layout: fixed;
+/*     margin-bottom: 20px; */
+    width:80%;
+    border: 2px solid;
+}
+.FormCon table td{
+	border: 1px solid #000;
+	height: 37px;
+	line-height: 22px;
+	vertical-align: middle;
+	background-color:#fdfdfd;
+}
+.FormCon table td select{
+	padding: 4px 0\9;
+	line-height: 35px;
+}
+.FormCon table td textarea{
+	max-width: 99%;
+	min-height: 45px;
+	max-height: 45px;
+	width: 99%;
+	height: 99%;
+	border: none;
+	padding:0;
+	margin:0;
+}
+.FormCon table td input[type="text"]{
+	text-indent: 5px;
+	display: inline-block;
+	height: 34px\9;
+	text-align: left;
+    text-overflow: ellipsis;
+    height: 99%;
+    line-height: 34px;
+    vertical-align: middle;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.checkInput{
+	width:auto!important;
+	vertical-align: middle;
+	margin: 0 3px;
+}
+.baseInfo label{
+	display: inline-block;
+}
+.FormCon table td input[type="text"],.FormCon table td select{
+	width: 99%;
+	height:98%;
+	border: none;
+	outline: none;
+	line-height: 34px;
+	padding-left:0;
+	padding-right:0;
+	margin-bottom:0;
+}
+.baseInfo,.situation,.arrangement{/*基本信息,综合情况，政协安排表格样式*/
+	border-collapse: collapse;
+	width: 960px;
+}
+.ztree{
+	background-color: #fff;
+	margin-top: 3px;
+    width: 500px;
+    height: auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.tabConBi .fixed-table-container{
+	width: 100%;
+	margin-left: 10px;
+	margin-top: 20px;
+	margin-bottom:20px;
+    border: 0px ;
+}
+.tabConBi .fixed-table-container table{
+	margin-left:0;
+	border-bottom:2px solid #000;
+}
+#familyInfo{
+	margin-left: 0;
+	overflow: hidden;
+}
+.bootstrp-tableDiv{
+	margin-left:10px;
+}
+.bootstrp-tableDiv input[type="button"]{
+	padding:1px 6px;
+	margin-left:5px;
+}
+/*third新增表格样式*/
+/*fourth政协人事安排页面*/
+.lefttd{
+	width:20%;
+}
+.lefttd .fixed-table-container{
+	height:500px;
+}
+.lefttd #treeDemo{
+    width: 95%;
+    height: auto;
+    overflow: hidden;
+    border:none;
+    background-color: #fff;
+    margin-top:5px;
+}
+.zxHuman{
+	line-height: 20px;
+}
+.zxHuman .btn-group a{
+	height: 13px;
+	line-height: 13px;
+}
+.zxHuman .btn .caret{
+	margin-top: 6px;
+}
+.righttd .FormCon{
+	margin-bottom: 0;
+}
+.righttd .tabConBi,.righttd .tabConSit,.righttd .tabConArg{
+	margin-left: 10px;
+	padding-top: 0;
+	border-left: none;
+	height: 40px;
+	line-height: 40px;
+}
+.righttd .FormCon label{
+	display: inline-block;
+}
+.righttd .FormCon select,.righttd .FormCon input{
+	margin:0 5px;
+	padding:0;
+	height: 25px;
+	width: 150px;
+	line-height: 25px;
+}
+#chaxunBtn{
+	width: 80px;
+	line-height: 20px;
+}
+.righttd .FormCon span{
+	vertical-align: middle;
+}
+.righttd .fixed-table-container{
+	border:1px solid #333;
+	margin: 0 5px;
+	height: 500px;
+}
+.table tbody tr.lanse > td {
+  background-color: #54b2e8;
+  color:#fff;
+}
+/*fourth政协人事安排页面*/
+/* 新增人物信息表按钮样式 */
+.ryxxFormTool .newryBtnStyle{
+	background-color:#54b2e8;
+	color:#fff;
+	border: 0;
+}
+/* 新增按钮样式 */
+/*政协安排添加会议会议信息jbox样式 */
+.tjhyxx{
+	margin: 20px auto 0;
+	width: 95%;
+}
+.tjhyxx td{
+	text-align: center;
+	height: 40px;
+	vertical-align: middle;
+}
+.tjhyxx td input{
+	margin-bottom: 0;
+}
+.jieciInfo{
+	text-align: left!important;
+}
+.jieciInfo input{
+    margin-top: 0;
+    width: 140px;
+}
+.hyInfo{
+	width: 154%;
+	margin-top: 15px;
+}
+.zkny{
+	width: 154%;
+	margin-top: 18px\9;
+}
+input.jisuanAge{
+	margin-left: 23px;
+}
+/*政协安排添加会议会议信息jbox样式 */
+/*查看政协安排jbox样式 */
+.zxapInfo{
+	table-layout: fixed;
+	width: 680px;
+	margin-top: 5px;
+}
+.zxapInfo td{
+	text-align: left;
+	height: 45px;
+	vertical-align: middle;
+	padding-left: 15px;
+	line-height: 45px;
+}
+.zxapInfo input{
+	border: 1px solid #ccc;
+	height: 25px;
+	height: 15px\9;
+	line-height: 15px\9;
+	vertical-align: middle;
+	margin-bottom: 0\9;
+}
+.beizhu{
+	width: 565px;
+	width: 575px\9;
+    padding: 0;
+    margin-bottom: 0;
+    height: 50px;
+    margin-top: 10px;
+}
+/*查看政协安排jbox样式 */
+/*jbox头顶样式*/
+div.jbox .jbox-title-panel{
+	background-color: #f5f5f5;
+}
+div.jbox .jbox-title-panel>.jbox-title{
+	font-weight: normal;
+}
+/*jbox头顶样式*/
+/*jbox不出纵向滚动条*/
+.jbox-content{
+    overflow-y: hidden!important;
+}
+/*jbox不出纵向滚动条*/
+.clearfix:after{
+    content:"";
+    display:table;
+    height:0;
+    visibility:both;
+    clear:both;
+}
+
+.clearfix{
+*zoom:1;    /* IE/7/6*/
+}

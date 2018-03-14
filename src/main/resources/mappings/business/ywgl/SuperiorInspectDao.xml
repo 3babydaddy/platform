@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.business.ywgl.dao.SuperiorInspectDao">
+	<resultMap id="BaseResultMap" type="com.tfkj.business.ywgl.entity.SuperiorInspect">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="SORT" jdbcType="VARCHAR" property="sort" />
+		<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+		<result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+		<result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+		<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+		<result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+		<result column="OFFICE_ID" jdbcType="VARCHAR" property="office.id" />
+		<result column="PARENT_OFFICE_IDS" jdbcType="VARCHAR" property="parentOfficeIds" />
+		<result column="CHARGE_OFFICE_IDS" jdbcType="VARCHAR" property="chargeOfficeIds" />
+		<result column="COHERE_OFFICE_IDS" jdbcType="VARCHAR" property="cohereOfficeIds" />
+		<result column="DUTY_OFFICE_IDS" jdbcType="VARCHAR" property="dutyOfficeIds" />
+		<result column="INSPECT_MATTER" jdbcType="VARCHAR" property="inspectMatter" />
+		<result column="INSPECT_TIME_START" jdbcType="TIMESTAMP"
+			property="inspectTimeStart" />
+		<result column="INSPECT_TIME_END" jdbcType="TIMESTAMP"
+			property="inspectTimeEnd" />
+		<result column="INSPECT_CONTENT" jdbcType="VARCHAR" property="inspectContent" />
+		<result column="INSPECT_FILE" jdbcType="VARCHAR" property="inspectFile" />
+		<result column="INSPECT_TYPE" jdbcType="VARCHAR" property="inspectType" />
+		<result column="CHECK_CONTENT" jdbcType="VARCHAR" property="checkContent" />
+		<result column="COMPLETE_CONTENT" jdbcType="VARCHAR" property="completeContent" />
+		<result column="DATA_STATE" jdbcType="VARCHAR" property="dataState" />
+		<result column="TRACK_MATTER" jdbcType="VARCHAR" property="trackMatter" />
+		<result column="TASK_STATE" jdbcType="VARCHAR" property="taskState" />
+		<result column="TASK_YEAR" jdbcType="VARCHAR" property="taskYear" />
+		<result column="PLAN_OPINION_FILE" jdbcType="VARCHAR" property="planOpinionFile" />
+		<result column="TRIP_PLAN_FILE" jdbcType="VARCHAR" property="tripPlanFile" />
+		<result column="RECEIVE_SCHEME_FILE" jdbcType="VARCHAR"
+			property="receiveSchemeFile" />
+		<result column="SELF_REPORT_TIME" jdbcType="TIMESTAMP"
+			property="selfReportTime" />
+		<result column="FINISH_TIME_LIMIT" jdbcType="TIMESTAMP"
+			property="finishTimeLimit" />
+		<result column="SPECIAL_LETTER_FILE" jdbcType="VARCHAR"
+			property="specialLetterFile" />
+		<result column="SELF_CHECK_REPORT_FILE" jdbcType="VARCHAR"
+			property="selfCheckReportFile" />
+		<result column="CHECK_CONTENT_FILE" jdbcType="VARCHAR"
+			property="checkContentFile" />
+		<result column="RESULT_SITUATION_FILE" jdbcType="VARCHAR"
+			property="resultSituationFile" />
+		<result column="RESULT_SITUATION" jdbcType="VARCHAR" property="resultSituation" />
+		<result column="S0001" jdbcType="VARCHAR" property="s0001" />
+		<result column="S0002" jdbcType="VARCHAR" property="s0002" />
+		<result column="S0003" jdbcType="VARCHAR" property="s0003" />
+		<result column="S0004" jdbcType="VARCHAR" property="s0004" />
+		<result column="S0005" jdbcType="VARCHAR" property="s0005" />
+		<result column="S0006" jdbcType="VARCHAR" property="s0006" />
+		<result column="S0007" jdbcType="VARCHAR" property="s0007" />
+		<result column="S0008" jdbcType="VARCHAR" property="s0008" />
+		<result column="S0009" jdbcType="VARCHAR" property="s0009" />
+		<collection property="chargeOfficeList"
+			ofType="com.tfkj.business.ywgl.entity.TableOfficeElement">
+			<id column="officeId" jdbcType="VARCHAR" property="id" />
+			<result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+			<result column="offId" jdbcType="VARCHAR" property="office.id" />
+			<result column="OFFICE_NAME" jdbcType="VARCHAR" property="office.name" />
+			<result column="CHARGE_PERSON" jdbcType="VARCHAR" property="chargePerson" />
+			<result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+			<result column="officeSort" jdbcType="VARCHAR" property="sort" />
+			<result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+			<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+			<result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+			<result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+			<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+			<result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+			<result column="A0001" jdbcType="VARCHAR" property="a0001" />
+			<result column="A0002" jdbcType="TIMESTAMP" property="a0002" />
+			<result column="A0003" jdbcType="VARCHAR" property="a0003" />
+			<result column="A0004" jdbcType="VARCHAR" property="a0004" />
+			<result column="A0005" jdbcType="VARCHAR" property="a0005" />
+		</collection>
+
+		<collection property="dutyOfficeList"
+			ofType="com.tfkj.business.ywgl.entity.TableOfficeElement">
+			<id column="officeId" jdbcType="VARCHAR" property="id" />
+			<result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+			<result column="offId" jdbcType="VARCHAR" property="office.id" />
+			<result column="OFFICE_NAME" jdbcType="VARCHAR" property="office.name" />
+			<result column="CHARGE_PERSON" jdbcType="VARCHAR" property="chargePerson" />
+			<result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+			<result column="officeSort" jdbcType="VARCHAR" property="sort" />
+			<result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+			<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+			<result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+			<result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+			<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+			<result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+			<result column="A0001" jdbcType="VARCHAR" property="a0001" />
+			<result column="A0002" jdbcType="TIMESTAMP" property="a0002" />
+			<result column="A0003" jdbcType="VARCHAR" property="a0003" />
+			<result column="A0004" jdbcType="VARCHAR" property="a0004" />
+			<result column="A0005" jdbcType="VARCHAR" property="a0005" />
+		</collection>
+		<collection property="cohereOfficeList"
+			ofType="com.tfkj.business.ywgl.entity.TableOfficeElement">
+			<id column="officeId" jdbcType="VARCHAR" property="id" />
+			<result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+			<result column="offId" jdbcType="VARCHAR" property="office.id" />
+			<result column="OFFICE_NAME" jdbcType="VARCHAR" property="office.name" />
+			<result column="CHARGE_PERSON" jdbcType="VARCHAR" property="chargePerson" />
+			<result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+			<result column="officeSort" jdbcType="VARCHAR" property="sort" />
+			<result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+			<result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+			<result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+			<result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+			<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+			<result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+			<result column="A0001" jdbcType="VARCHAR" property="a0001" />
+			<result column="A0002" jdbcType="TIMESTAMP" property="a0002" />
+			<result column="A0003" jdbcType="VARCHAR" property="a0003" />
+			<result column="A0004" jdbcType="VARCHAR" property="a0004" />
+			<result column="A0005" jdbcType="VARCHAR" property="a0005" />
+		</collection>
+	</resultMap>
+	<sql id="Base_Column_List">
+		a.ID,a.SORT,a.CREATE_DATE,a.CREATE_BY,a.UPDATE_BY,a.UPDATE_DATE,a.REMARKS,a.DEL_FLAG,a.OFFICE_ID,a.
+		PARENT_OFFICE_IDS,a.CHARGE_OFFICE_IDS,a.COHERE_OFFICE_IDS,a.DUTY_OFFICE_IDS,a.INSPECT_MATTER,a.
+		INSPECT_TIME_START,a.INSPECT_TIME_END,a.INSPECT_CONTENT,a.INSPECT_FILE,a.INSPECT_TYPE,a.
+		CHECK_CONTENT,a.COMPLETE_CONTENT,a.DATA_STATE,a.TRACK_MATTER,a.TASK_STATE,a.TASK_YEAR,a.
+		PLAN_OPINION_FILE,a.TRIP_PLAN_FILE,a.RECEIVE_SCHEME_FILE,a.SELF_REPORT_TIME,a.FINISH_TIME_LIMIT,a.
+		SPECIAL_LETTER_FILE,a.SELF_CHECK_REPORT_FILE,a.CHECK_CONTENT_FILE,a.RESULT_SITUATION_FILE,a.
+		RESULT_SITUATION,a. S0001,a. S0002,a. S0003,a. S0004,a. S0005,a.
+		S0006,a. S0007,a. S0008,a. S0009
+	</sql>
+	<sql id="Base_Column_Office">
+		office.ID as officeId , office.DATA_ID, office.OFFICE_ID as offId,
+		office.OFFICE_NAME,
+		office.CHARGE_PERSON, office.FILE_PATH, office.SORT
+		as officeSort,
+		office.CREATE_BY, office.CREATE_DATE,
+		office.UPDATE_BY,
+		office.UPDATE_DATE, office.REMARKS, office.DEL_FLAG,office.
+		A0001,office. A0002,office. A0003,office. A0004,office. A0005
+	</sql>
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Base_Column_Office" />
+		from ywgl_superior_inspect a
+		left join ywgl_table_office_element office
+		on a.id=office.DATA_ID
+		where a.ID = #{id,jdbcType=VARCHAR} and
+		a.DEL_FLAG='0'
+		ORDER BY office.SORT
+	</select>
+	<select id="findList" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		from ywgl_superior_inspect a
+		<where>
+			a.DEL_FLAG='0'
+			<if test="parentOfficeIds != null and parentOfficeIds != ''">
+				AND PARENT_OFFICE_IDS =
+				#{parentOfficeIds,jdbcType=VARCHAR}
+			</if>
+			<if test="chargeOfficeIds != null and chargeOfficeIds != ''">
+				AND find_in_set(#{chargeOfficeIds},a.CHARGE_OFFICE_IDS)
+			</if>
+			<if test="s0004 != null and s0004 != ''">
+				AND find_in_set(#{s0004},a.s0004)
+			</if>
+			<if test="s0005 != null and s0005 != ''">
+				AND find_in_set(#{s0005},a.s0005)
+			</if>
+			<if test="inspectMatter != null and inspectMatter != ''">
+				AND INSPECT_MATTER LIKE CONCAT('%', #{inspectMatter},
+				'%')
+			</if>
+			<if test="inspectTimeStart != null and inspectTimeEnd != null">
+    <![CDATA[
+    			AND   INSPECT_TIME_START >= #{inspectTimeStart,jdbcType=TIMESTAMP}
+    ]]>
+    <![CDATA[
+    			AND   INSPECT_TIME_END <= #{inspectTimeEnd,jdbcType=TIMESTAMP}
+    ]]>
+			</if>
+			<if test="inspectTimeStart != null and inspectTimeEnd == null">
+     <![CDATA[
+     			AND   INSPECT_TIME_START >= #{inspectTimeStart,jdbcType=TIMESTAMP}
+     ]]>
+			</if>
+			<if test="inspectTimeStart == null and inspectTimeEnd != null">
+    <![CDATA[
+    			AND CASE WHEN  INSPECT_TIME_START IS NULL THEN
+							 INSPECT_TIME_END <= #{inspectTimeEnd,jdbcType=TIMESTAMP}
+						ELSE
+							INSPECT_TIME_START <= #{inspectTimeEnd,jdbcType=TIMESTAMP}
+						END
+	]]>
+			</if>
+			<if test="s0002Start != null">
+     <![CDATA[
+     			AND   s0002 >= #{s0002Start,jdbcType=TIMESTAMP}
+     ]]>
+			</if>
+			<if test="s0002End != null">
+     <![CDATA[
+     			AND   s0002 <= #{s0002End,jdbcType=TIMESTAMP}
+     ]]>
+			</if>
+			<if test="taskYear != null  and taskYear != ''">
+				AND ((year(INSPECT_TIME_START) = #{taskYear}) or
+				(year(INSPECT_TIME_END) = #{taskYear}))
+			</if>
+			<if test="inspectContent != null  and inspectContent != ''">
+				AND INSPECT_CONTENT LIKE CONCAT('%', #{inspectContent},
+				'%')
+			</if>
+
+			<if test="inspectType != null  and inspectType != ''">
+				AND INSPECT_TYPE = #{inspectType,jdbcType=VARCHAR}
+			</if>
+			<if test="checkContent != null  and checkContent != ''">
+				AND CHECK_CONTENT LIKE CONCAT('%', #{checkContent}, '%')
+			</if>
+			<if test="completeContent != null  and completeContent != ''">
+				AND COMPLETE_CONTENT LIKE CONCAT('%', #{completeContent},
+				'%')
+			</if>
+			<if test="resultSituation!= null  and resultSituation != ''">
+				AND RESULT_SITUATION LIKE CONCAT('%', #{resultSituation},
+				'%')
+			</if>
+			<if test="dataState != null  and dataState != ''">
+				AND DATA_STATE = #{dataState,jdbcType=VARCHAR}
+			</if>
+			<if test="trackMatter != null  and trackMatter != ''">
+				AND TRACK_MATTER LIKE CONCAT('%', #{trackMatter}, '%')
+			</if>
+			<if test="taskState != null  and taskState != ''">
+				AND TASK_STATE = #{taskState,jdbcType=VARCHAR}
+			</if>
+
+		</where>
+		order by a.INSPECT_TIME_START
+	</select>
+	<insert id="insert">
+
+		insert into ywgl_superior_inspect
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				CREATE_BY,
+			</if>
+			<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				UPDATE_BY,
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE,
+			</if>
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG,
+			</if>
+			<if test="office != null and office.id != null and office.id != ''">
+				OFFICE_ID,
+			</if>
+			<if test="parentOfficeIds != null">
+				PARENT_OFFICE_IDS,
+			</if>
+			<if test="chargeOfficeIds != null">
+				CHARGE_OFFICE_IDS,
+			</if>
+			<if test="cohereOfficeIds != null">
+				COHERE_OFFICE_IDS,
+			</if>
+			<if test="dutyOfficeIds != null">
+				DUTY_OFFICE_IDS,
+			</if>
+			<if test="inspectMatter != null">
+				INSPECT_MATTER,
+			</if>
+			<if test="inspectTimeStart != null">
+				INSPECT_TIME_START,
+			</if>
+			<if test="inspectTimeEnd != null">
+				INSPECT_TIME_END,
+			</if>
+			<if test="inspectContent != null">
+				INSPECT_CONTENT,
+			</if>
+			<if test="inspectFile != null">
+				INSPECT_FILE,
+			</if>
+			<if test="inspectType != null">
+				INSPECT_TYPE,
+			</if>
+			<if test="checkContent != null">
+				CHECK_CONTENT,
+			</if>
+			<if test="completeContent != null">
+				COMPLETE_CONTENT,
+			</if>
+			<if test="dataState != null">
+				DATA_STATE,
+			</if>
+			<if test="trackMatter != null">
+				TRACK_MATTER,
+			</if>
+			<if test="taskState != null">
+				TASK_STATE,
+			</if>
+			<if test="taskYear != null">
+				TASK_YEAR,
+			</if>
+			<if test="planOpinionFile != null">
+				PLAN_OPINION_FILE,
+			</if>
+			<if test="tripPlanFile != null">
+				TRIP_PLAN_FILE,
+			</if>
+			<if test="receiveSchemeFile != null">
+				RECEIVE_SCHEME_FILE,
+			</if>
+			<if test="selfReportTime != null">
+				SELF_REPORT_TIME,
+			</if>
+			<if test="finishTimeLimit != null">
+				FINISH_TIME_LIMIT,
+			</if>
+			<if test="specialLetterFile != null">
+				SPECIAL_LETTER_FILE,
+			</if>
+			<if test="selfCheckReportFile != null">
+				SELF_CHECK_REPORT_FILE,
+			</if>
+			<if test="checkContentFile != null">
+				CHECK_CONTENT_FILE,
+			</if>
+			<if test="resultSituationFile != null">
+				RESULT_SITUATION_FILE,
+			</if>
+			<if test="resultSituation != null">
+				RESULT_SITUATION,
+			</if>
+			<if test="s0001 != null">
+				S0001,
+			</if>
+			<if test="s0002 != null">
+				S0002,
+			</if>
+			<if test="s0003 != null">
+				S0003,
+			</if>
+			<if test="s0004 != null">
+				S0004,
+			</if>
+			<if test="s0005 != null">
+				S0005,
+			</if>
+			<if test="s0006 != null">
+				S0006,
+			</if>
+			<if test="s0007 != null">
+				S0007,
+			</if>
+			<if test="s0008 != null">
+				S0008,
+			</if>
+			<if test="s0009 != null">
+				S0009,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				#{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				#{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="office != null and office.id != null and office.id != ''">
+				#{office.id,jdbcType=VARCHAR},
+			</if>
+			<if test="parentOfficeIds != null">
+				#{parentOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeOfficeIds != null">
+				#{chargeOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="cohereOfficeIds != null">
+				#{cohereOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="dutyOfficeIds != null">
+				#{dutyOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectMatter != null">
+				#{inspectMatter,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectTimeStart != null">
+				#{inspectTimeStart,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inspectTimeEnd != null">
+				#{inspectTimeEnd,jdbcType=TIMESTAMP},
+			</if>
+			<if test="inspectContent != null">
+				#{inspectContent,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectFile != null">
+				#{inspectFile,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectType != null">
+				#{inspectType,jdbcType=VARCHAR},
+			</if>
+			<if test="checkContent != null">
+				#{checkContent,jdbcType=VARCHAR},
+			</if>
+			<if test="completeContent != null">
+				#{completeContent,jdbcType=VARCHAR},
+			</if>
+			<if test="dataState != null">
+				#{dataState,jdbcType=VARCHAR},
+			</if>
+			<if test="trackMatter != null">
+				#{trackMatter,jdbcType=VARCHAR},
+			</if>
+			<if test="taskState != null">
+				#{taskState,jdbcType=VARCHAR},
+			</if>
+			<if test="taskYear != null">
+				#{taskYear,jdbcType=VARCHAR},
+			</if>
+			<if test="planOpinionFile != null">
+				#{planOpinionFile,jdbcType=VARCHAR},
+			</if>
+			<if test="tripPlanFile != null">
+				#{tripPlanFile,jdbcType=VARCHAR},
+			</if>
+			<if test="receiveSchemeFile != null">
+				#{receiveSchemeFile,jdbcType=VARCHAR},
+			</if>
+			<if test="selfReportTime != null">
+				#{selfReportTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="finishTimeLimit != null">
+				#{finishTimeLimit,jdbcType=TIMESTAMP},
+			</if>
+			<if test="specialLetterFile != null">
+				#{specialLetterFile,jdbcType=VARCHAR},
+			</if>
+			<if test="selfCheckReportFile != null">
+				#{selfCheckReportFile,jdbcType=VARCHAR},
+			</if>
+			<if test="checkContentFile != null">
+				#{checkContentFile,jdbcType=VARCHAR},
+			</if>
+			<if test="resultSituationFile != null">
+				#{resultSituationFile,jdbcType=VARCHAR},
+			</if>
+			<if test="resultSituation != null">
+				#{resultSituation,jdbcType=VARCHAR},
+			</if>
+			<if test="s0001 != null">
+				#{s0001,jdbcType=VARCHAR},
+			</if>
+			<if test="s0002 != null">
+				#{s0002,jdbcType=VARCHAR},
+			</if>
+			<if test="s0003 != null">
+				#{s0003,jdbcType=VARCHAR},
+			</if>
+			<if test="s0004 != null">
+				#{s0004,jdbcType=VARCHAR},
+			</if>
+			<if test="s0005 != null">
+				#{s0005,jdbcType=VARCHAR},
+			</if>
+			<if test="s0006 != null">
+				#{s0006,jdbcType=VARCHAR},
+			</if>
+			<if test="s0007 != null">
+				#{s0007,jdbcType=VARCHAR},
+			</if>
+			<if test="s0008 != null">
+				#{s0008,jdbcType=VARCHAR},
+			</if>
+			<if test="s0009 != null">
+				#{s0009,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update">
+
+		update ywgl_superior_inspect
+		<set>
+			<if test="sort != null">
+				SORT = #{sort,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="office != null and office.id != null and office.id != ''">
+				OFFICE_ID = #{office.id,jdbcType=VARCHAR},
+			</if>
+			<if test="parentOfficeIds != null">
+				PARENT_OFFICE_IDS = #{parentOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeOfficeIds != null">
+				CHARGE_OFFICE_IDS = #{chargeOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="cohereOfficeIds != null">
+				COHERE_OFFICE_IDS = #{cohereOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="dutyOfficeIds != null">
+				DUTY_OFFICE_IDS = #{dutyOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectMatter != null">
+				INSPECT_MATTER = #{inspectMatter,jdbcType=VARCHAR},
+			</if>
+			<!-- 督查时间 -->
+			INSPECT_TIME_START = #{inspectTimeStart,jdbcType=TIMESTAMP},
+			INSPECT_TIME_END = #{inspectTimeEnd,jdbcType=TIMESTAMP},
+			<if test="inspectContent != null">
+				INSPECT_CONTENT = #{inspectContent,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectFile != null">
+				INSPECT_FILE = #{inspectFile,jdbcType=VARCHAR},
+			</if>
+			<if test="inspectType != null">
+				INSPECT_TYPE = #{inspectType,jdbcType=VARCHAR},
+			</if>
+			<if test="checkContent != null">
+				CHECK_CONTENT = #{checkContent,jdbcType=VARCHAR},
+			</if>
+			<if test="completeContent != null">
+				COMPLETE_CONTENT = #{completeContent,jdbcType=VARCHAR},
+			</if>
+			<if test="dataState != null">
+				DATA_STATE = #{dataState,jdbcType=VARCHAR},
+			</if>
+			<if test="trackMatter != null">
+				TRACK_MATTER = #{trackMatter,jdbcType=VARCHAR},
+			</if>
+			<if test="taskState != null">
+				TASK_STATE = #{taskState,jdbcType=VARCHAR},
+			</if>
+			<if test="taskYear != null">
+				TASK_YEAR = #{taskYear,jdbcType=VARCHAR},
+			</if>
+			<if test="planOpinionFile != null">
+				PLAN_OPINION_FILE = #{planOpinionFile,jdbcType=VARCHAR},
+			</if>
+			<if test="tripPlanFile != null">
+				TRIP_PLAN_FILE = #{tripPlanFile,jdbcType=VARCHAR},
+			</if>
+			<if test="receiveSchemeFile != null">
+				RECEIVE_SCHEME_FILE =
+				#{receiveSchemeFile,jdbcType=VARCHAR},
+			</if>
+			<if test="selfReportTime != null">
+				SELF_REPORT_TIME = #{selfReportTime,jdbcType=TIMESTAMP},
+			</if>
+			<!-- 完成时限 -->
+			FINISH_TIME_LIMIT = #{finishTimeLimit,jdbcType=TIMESTAMP},
+			<if test="specialLetterFile != null">
+				SPECIAL_LETTER_FILE =
+				#{specialLetterFile,jdbcType=VARCHAR},
+			</if>
+			<if test="selfCheckReportFile != null">
+				SELF_CHECK_REPORT_FILE =
+				#{selfCheckReportFile,jdbcType=VARCHAR},
+			</if>
+			<if test="checkContentFile != null">
+				CHECK_CONTENT_FILE =
+				#{checkContentFile,jdbcType=VARCHAR},
+			</if>
+			<if test="resultSituationFile != null">
+				RESULT_SITUATION_FILE =
+				#{resultSituationFile,jdbcType=VARCHAR},
+			</if>
+			<if test="resultSituation != null">
+				RESULT_SITUATION = #{resultSituation,jdbcType=VARCHAR},
+			</if>
+			<if test="s0001 != null">
+				S0001 = #{s0001,jdbcType=VARCHAR},
+			</if>
+			<!--落实时间 -->
+			S0002 = #{s0002,jdbcType=VARCHAR},
+			<if test="s0003 != null">
+				S0003 = #{s0003,jdbcType=VARCHAR},
+			</if>
+			<if test="s0004 != null">
+				S0004 = #{s0004,jdbcType=VARCHAR},
+			</if>
+			<if test="s0005 != null">
+				S0005 = #{s0005,jdbcType=VARCHAR},
+			</if>
+			<if test="s0006 != null">
+				S0006 = #{s0006,jdbcType=VARCHAR},
+			</if>
+			<if test="s0007 != null">
+				S0007 = #{s0007,jdbcType=VARCHAR},
+			</if>
+			<if test="s0008 != null">
+				S0008 = #{s0008,jdbcType=VARCHAR},
+			</if>
+			<if test="s0009 != null">
+				S0009 = #{s0009,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="delete">
+
+		update ywgl_superior_inspect
+		<set>
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+
+				UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+			</if>
+
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>

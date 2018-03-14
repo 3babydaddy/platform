@@ -1,0 +1,378 @@
+/**
+ * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
+ */
+package com.tfkj.framework.system.web;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.tfkj.business.web.constants.Constants;
+import com.tfkj.framework.core.beanvalidator.BeanValidators;
+import com.tfkj.framework.core.config.Global;
+import com.tfkj.framework.core.service.BaseService;
+import com.tfkj.framework.core.utils.DateUtils;
+import com.tfkj.framework.core.utils.StringUtils;
+import com.tfkj.framework.core.utils.excel.ExportExcel;
+import com.tfkj.framework.core.utils.excel.ImportExcel;
+import com.tfkj.framework.core.web.BaseController;
+import com.tfkj.framework.system.entity.Office;
+import com.tfkj.framework.system.entity.User;
+import com.tfkj.framework.system.service.OfficeService;
+import com.tfkj.framework.system.utils.DictUtils;
+import com.tfkj.framework.system.utils.UserUtils;
+
+/**
+ * 单位Controller
+ *
+ * @author ThinkGem
+ * @version 2013-5-15
+ */
+@Controller
+@RequestMapping(value = "${adminPath}/sys/office")
+public class OfficeController extends BaseController {
+
+	@Autowired
+	private OfficeService officeService;
+
+	@ModelAttribute("office")
+	public Office get(@RequestParam(required = false) String id) {
+
+		if (StringUtils.isNotBlank(id)) {
+			Office office = officeService.get(id);
+			if (office == null) {
+				return new Office();
+			} else {
+				return officeService.get(id);
+			}
+		} else {
+			return new Office();
+		}
+	}
+
+	/**
+	 * @Title: index
+	 * @Description: 查询列表
+	 * @param @param office
+	 * @param @param model
+	 * @param @return 参数
+	 * @return String 返回类型
+	 * @throws
+	 */
+	@RequestMapping(value = { "" })
+	public String index(Office office, Model model) {
+
+		model.addAttribute("list", officeService.findCxList(office));
+		return "system/office/officeList";
+	}
+
+	@RequestMapping(value = { "list" })
+	public String list(Office office, Model model) {
+
+		model.addAttribute("list", officeService.findList(office));
+		return "system/office/officeList";
+	}
+
+	/**
+	 * 查询list
+	 *
+	 * @param office
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = { "cxlist" })
+	public String cxlist(Office office, Model model) {
+
+		model.addAttribute("list", officeService.findCxList(office));
+		return "system/office/officeCxList";
+	}
+
+	/**
+	 * @Title: form
+	 * @Description: 跳转form
+	 * @param @param office
+	 * @param @param model
+	 * @param @return 参数
+	 * @return String 返回类型
+	 * @throws
+	 */
+	@RequestMapping(value = "form")
+	public String form(Office office, Model model) {
+
+		User user = UserUtils.getUser();
+		if (office.getParent() == null || office.getParent().getId() == null) {
+			office.setParent(user.getOffice());
+		}
+		office.setParent(officeService.get(office.getParent().getId()));
+		// 自动获取排序号
+		if (StringUtils.isBlank(office.getId()) && office.getParent() != null) {
+			int size = 0;
+			List<Office> list = officeService.findList(false);
+			for (int i = 0; i < list.size(); i++) {
+				Office e = list.get(i);
+				if (e.getParent() != null && e.getParent().getId() != null && e.getParent().getId().equals(office.getParent().getId())) {
+					size++;
+				}
+			}
+			office.setId(office.getParent().getId() + StringUtils.leftPad(String.valueOf(size > 0 ? size + 1 : 1), 3, "0"));
+		}
+		model.addAttribute("office", office);
+		return "system/office/officeForm";
+	}
+
+	/**
+	 * @Title: save
+	 * @Description: 保存
+	 * @param @param office
+	 * @param @param model
+	 * @param @param redirectAttributes
+	 * @param @return 参数
+	 * @return String 返回类型
+	 * @throws
+	 */
+	@RequestMapping(value = "save")
+	public String save(Office office, Model model, RedirectAttributes redirectAttributes) {
+
+		office.setStateFlag(Constants.OFFICE_AVAILABLE);
+		officeService.save(office);
+		if (office.getChildDeptList() != null) {
+			Office childOffice = null;
+			for (String id : office.getChildDeptList()) {
+				childOffice = new Office();
+				childOffice.setName(DictUtils.getDictChname(id, "sys_office_common", "未知"));
+				childOffice.setParent(office);
+				childOffice.setStateFlag(Global.YES);
+				officeService.save(childOffice);
+			}
+		}
+		addMessage(redirectAttributes, "保存单位'" + office.getName() + "'成功");
+		model.addAttribute("list", officeService.findList(false));
+		return "redirect:" + adminPath + "/sys/office";
+	}
+
+	/**
+	 * @Title: delete
+	 * @Description: 删除
+	 * @param @param office
+	 * @param @param model
+	 * @param @param redirectAttributes
+	 * @param @return 参数
+	 * @return String 返回类型
+	 * @throws
+	 */
+	@RequestMapping(value = "delete")
+	public String delete(Office office, Model model, RedirectAttributes redirectAttributes) {
+
+		officeService.delete(office);
+		addMessage(redirectAttributes, "删除单位成功");
+		model.addAttribute("list", officeService.findList(false));
+		return "redirect:" + adminPath + "/sys/office/";
+	}
+
+	/**
+	 * @Title: treeData
+	 * @Description: 获取单位JSON数据。
+	 * @param @param extId 排除的ID
+	 * @param @param type 类型
+	 * @param @param grade 显示级别
+	 * @param @param isAll true显示包括类别
+	 * @param @param response
+	 * @param @return 参数
+	 * @return List<Map<String,Object>> 返回类型
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping(value = "treeData")
+	public List<Map<String, Object>> treeData(@RequestParam(required = false) String extId, @RequestParam(required = false) String type, @RequestParam(required = false) Long grade,
+	        @RequestParam(required = false) Boolean isAll, HttpServletResponse response) {
+
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+		List<Office> list = officeService.findList(isAll);
+		for (int i = 0; i < list.size(); i++) {
+			Office e = list.get(i);
+			if ((StringUtils.isBlank(extId) || (extId != null && !extId.equals(e.getId()) && e.getParentIds().indexOf("," + extId + ",") == -1))) {
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("id", e.getId());
+				map.put("pId", e.getParentId());
+				map.put("pIds", e.getParentIds());
+				map.put("name", e.getName());
+				mapList.add(map);
+			}
+		}
+		return mapList;
+	}
+
+	/**
+	 * 下载导入用户数据模板
+	 *
+	 * @param response
+	 * @param redirectAttributes
+	 * @return
+	 */
+	@RequestMapping(value = "import/template")
+	public String importFileTemplate(HttpServletResponse response, RedirectAttributes redirectAttributes) {
+
+		try {
+			String fileName = "单位数据导入模板.xlsx";
+			List<Office> list = Lists.newArrayList();
+			Office parent1 = new Office();
+			Office parent2 = new Office();
+			Office office1 = new Office();
+			Office office2 = new Office();
+			// 填报单位唯一标识
+			office1.setId("1");
+			office2.setId("2");
+			// 上级单位ID
+			parent1.setId("0");
+			office1.setParent(parent1);
+			parent2.setId("1");
+			office2.setParent(parent2);
+			// 单位名称
+			office1.setName("单位名称");
+			office2.setName("单位名称");
+			// 规范简称
+			office1.setGfjc("规范简称");
+			office2.setGfjc("规范简称");
+			// 组织人事部门
+			office1.setZzrsbm("组织人事部门");
+			office2.setZzrsbm("组织人事部门");
+			// 单位性质
+			office1.setJgxz("01");
+			office2.setJgxz("01");
+			// 使用版本
+			office1.setVersion("0");
+			office2.setVersion("1");
+			// 排序
+			office1.setSort(100);
+			office2.setSort(101);
+			list.add(office1);
+			list.add(office2);
+			new ExportExcel("单位数据", Constants.EXPORT_LIST_TYPE_INPUT_ZIP_FOR_OFFICE, Office.class).setDataList(list, Constants.EXPORT_LIST_TYPE_INPUT_ZIP_FOR_OFFICE).write(response, fileName)
+			        .dispose();
+			return null;
+		} catch ( Exception e ) {
+			addMessage(redirectAttributes, "导入模板下载失败！系统出现错误,请稍后重试!");
+		}
+		return "redirect:" + adminPath + "/sys/office/list?repage";
+	}
+
+	/**
+	 * @Title: importFile
+	 * @Description: 导入用户数据
+	 * @param @param file
+	 * @param @param redirectAttributes
+	 * @param @return 参数
+	 * @return String 返回类型
+	 * @throws
+	 */
+	@RequestMapping(value = "import", method = RequestMethod.POST)
+	public String importFile(MultipartFile file, RedirectAttributes redirectAttributes) {
+
+		try {
+			int successNum = 0;
+			int failureNum = 0;
+			StringBuilder failureMsg = new StringBuilder();
+			ImportExcel ie = new ImportExcel(file, 1, 0);
+			List<Office> list = ie.getDataList(Office.class, Constants.EXPORT_LIST_TYPE_INPUT_ZIP_FOR_OFFICE);
+			for (Office office : list) {
+				if (office == null || StringUtils.isBlank(office.getId())) {
+					continue;
+				}
+				try {
+					BeanValidators.validateWithException(validator, office);
+					String parentIds = office.getParentId() + "," + office.getId();
+					office.setParentIds(parentIds);
+					if (!Constants.OFFICE_UN_AVAILABLE.equals(office.getStateFlag())) {
+						office.setStateFlag(Constants.OFFICE_AVAILABLE);
+					}
+					officeService.save(office);
+					successNum++;
+				} catch ( ConstraintViolationException ex ) {
+					failureMsg.append("<br/>单位名 " + office.getName() + " 导入失败：");
+					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
+					for (String message : messageList) {
+						failureMsg.append(message + "; ");
+						failureNum++;
+					}
+				} catch ( Exception ex ) {
+					failureMsg.append("<br/>单位名" + office.getName() + " 导入失败：" + ex.getMessage());
+				}
+			}
+			if (failureNum > 0) {
+				failureMsg.insert(0, "，失败 " + failureNum + " 条用户，导入信息如下：");
+			}
+			addMessage(redirectAttributes, "已成功导入 " + successNum + " 条用户" + failureMsg);
+		} catch ( Exception e ) {
+			addMessage(redirectAttributes, "导入用户失败！系统出现错误,请稍后重试!");
+		}
+		return "redirect:" + adminPath + "/sys/office";
+	}
+
+	/**
+	 * @Title: batchUpdate
+	 * @Description: 批量维护
+	 * @param @param office
+	 * @param @param searchFlag
+	 * @param @param ids
+	 * @param @param sorts
+	 * @param @param redirectAttributes
+	 * @param @return 参数
+	 * @return String 返回类型
+	 * @throws
+	 */
+	@RequestMapping(value = "batchUpdate")
+	public String batchUpdate(Office office, String[] ids, String[] jgxz, String[] version, String[] stateFlag, Integer[] sorts, RedirectAttributes redirectAttributes) {
+
+		officeService.batchUpdate(ids, jgxz, version, stateFlag, sorts);
+		addMessage(redirectAttributes, "更新排序成功!");
+		return "redirect:" + adminPath + "/sys/office";
+	}
+
+	/**
+	 * @Title: exportExcel
+	 * @Description: 导出Excel
+	 * @param @param ids
+	 * @param @param office
+	 * @param @param request
+	 * @param @param response
+	 * @param @param redirectAttributes
+	 * @param @return 参数
+	 * @return String 返回类型
+	 * @throws
+	 */
+	@RequestMapping(value = "exportExcel")
+	public String exportExcel(String ids, Office office, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+
+		office.getSqlMap().put("dsf", BaseService.dataScopeFilter(office.getCurrentUser(), "o", "u"));
+		String title = Constants.EXCEL_TITLE_OFFICE_NAME_LIST;
+		String fileName = title + DateUtils.getDate() + ".xlsx";
+		try {
+			List<Office> officeList = officeService.findCxList(office);
+			for (Office entity : officeList) {
+				String officeName = entity.getName().replace(Constants.OFFICE_UN_AVAILABLE_NAME, "");
+				entity.setName(officeName);
+			}
+			new ExportExcel(title, office.getExportListType(), Office.class).setDataList(officeList, office.getExportListType()).write(response, fileName).dispose();
+		} catch ( Exception e ) {
+			e.printStackTrace();
+			addMessage(redirectAttributes, "导出单位管理列表数据失败");
+		}
+		return "redirect:" + Global.getAdminPath() + "/sys/office/";
+	}
+}

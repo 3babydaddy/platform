@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.framework.system.dao.DataLogDao">
+    
+	<sql id="dataLogColumns">
+		a.id AS "id",
+		a.data_type AS "dataType",
+		a.data_id AS "dataId",
+		a.oper_type AS "operType",
+		a.oper_detail AS "operDetail",
+		a.oper_ip AS "operIp",
+		a.oper_by AS "operBy",
+		a.oper_date AS "operDate",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="dataLogJoins">
+	</sql>
+    
+	<select id="get" resultType="DataLog">
+		SELECT 
+			<include refid="dataLogColumns"/>
+		FROM sys_data_log a
+		<include refid="dataLogJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	<select id="getFirstSubmitDate" resultType="java.util.Date">
+        SELECT
+            MIN(oper_date) firstSubmitDate,
+            DATA_ID,
+            data_type
+        FROM
+            sys_data_log
+        WHERE
+            data_type = #{dataType}
+        AND oper_type IN ('05', '06')
+        and DATA_ID = #{dataId}
+        GROUP BY
+            DATA_ID,
+            DATA_TYPE
+    </select>
+    <select id="getSubmitDate" resultType="java.util.Date">
+        SELECT
+            MAX(oper_date) submitDate,
+            DATA_ID,
+            data_type
+        FROM
+            sys_data_log
+        WHERE
+            data_type = #{dataType}
+            <if test="dataType=='01'">
+         AND oper_type IN ('05')
+        </if>
+        <if test="dataType=='02'|| dataType=='03' ">
+         AND oper_type IN ('06')
+        </if>
+        
+        and DATA_ID = #{dataId}
+        GROUP BY
+            DATA_ID,
+            DATA_TYPE
+    </select>
+	<select id="getSecondSubmitDate" resultType="java.util.Date">
+        SELECT
+            MIN(oper_date) secondSubmitDate,
+            DATA_ID,
+            data_type
+        FROM
+            sys_data_log
+        WHERE
+            data_type = #{dataType}
+        AND oper_type IN ('06')
+        and DATA_ID = #{dataId}
+        GROUP BY
+            DATA_ID,
+            DATA_TYPE
+    </select>
+    <select id="getNoBloodDate" resultType="java.util.Date">
+        SELECT
+             MAX(oper_date) AS "noBloodDate",
+            DATA_ID,
+            data_type
+        FROM
+            sys_data_log
+        WHERE
+            data_type = #{dataType}
+        AND oper_type = '10'
+        and DATA_ID = #{dataId}
+        GROUP BY
+            DATA_ID,
+            DATA_TYPE
+    </select>
+    <select id="getReturnDate" resultType="java.util.Date">
+        SELECT
+            MAX(OPER_DATE) AS "returnDate",
+            DATA_ID,
+            data_type
+        FROM
+            sys_data_log
+        WHERE
+            data_type = #{dataType}
+        AND oper_type IN ('07', '08')
+        and DATA_ID = #{dataId}
+        GROUP BY
+            DATA_ID,
+            DATA_TYPE
+    </select>
+	<select id="findList" resultType="DataLog">
+		SELECT 
+			<include refid="dataLogColumns"/>
+		FROM sys_data_log a
+		<include refid="dataLogJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+	    ORDER BY a.update_date DESC
+	</select>
+	
+	<select id="findAllList" resultType="DataLog">
+		SELECT 
+			<include refid="dataLogColumns"/>
+		FROM sys_data_log a
+		<include refid="dataLogJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+        ORDER BY a.update_date DESC
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_data_log(
+			id,
+			data_type,
+			data_id,
+			oper_type,
+			oper_detail,
+			oper_ip,
+			oper_by,
+			oper_date,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{dataType},
+			#{dataId},
+			#{operType},
+			#{operDetail},
+			#{operIp},
+			#{operBy.id},
+			#{operDate},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_data_log SET 	
+			data_type = #{dataType},
+			data_id = #{dataId},
+			oper_type = #{operType},
+			oper_detail = #{operDetail},
+			oper_ip = #{operIp},
+			oper_by = #{operBy.id},
+			oper_date = #{operDate},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sys_data_log SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

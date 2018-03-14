@@ -1,0 +1,260 @@
+/*淇敼浜洪�夋牱寮�*/
+.xgrxForm .jxInfo td{
+	border: 1px solid #ccc;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+}
+.xgrxForm select{
+	height: 30px!important;
+	line-height: 30px;
+	width: 99%;
+	border: none;
+	text-indent: 10px;
+    text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.xgrxForm input{
+	height: 28px!important;
+	line-height: 28px;
+	width: 99%;
+	border: none;
+	text-indent: 10px;
+    text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.xgrxForm select{
+	padding-bottom: 4px\9;
+}
+.xgrxForm input:focus{
+	outline: none;
+}
+.jxInfo{
+	table-layout: fixed;
+	border-collapse: collapse;
+	width: 1017px!important;
+	height: 160px;
+	border: 2px solid;
+}
+.rxtjqkTit{
+	width: 810px;
+	margin-left: 10px;
+    margin-top: 10px;
+}
+.rxtjqkCon{
+	width: 1015px;
+	border: 1px solid #ccc;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+.rxtjqkCon table{
+	text-align: left;
+	table-layout: fixed;
+	width: 97%;
+	border-collapse: collapse;
+	border: none!important;
+}
+.rxtjqkCon td{
+	border: none!important;
+	height: 35px;
+	line-height: 35px;
+}
+.rxtjqkCon select{
+	border:1px solid #333!important;
+	width: 80%!important;
+	margin: 5px 0;
+}
+.rxtjqkCon #CODETJZW_zxapZxtjapzw_select , #CODEHJAPZT2_zxapZxtjapzt1_select,#CODEHJAPZT2_zxapZxtjapzt2_select,#CODEDJJZAPZT1_zxapZxtjapzt1_select,#CODEJZAPZT2_zxapZxtjapzt2_select{
+	border:1px solid #333!important;
+	width: 68%!important;
+	margin: 5px 0;
+}
+.rxtjqkCon #dw_zxapZxtjtmdw_select,#dw_zxapZxtjjb_select{
+	border:1px solid #333!important;
+	width: 80%!important;
+}
+.rxtjqkCon  #fzxsx{
+	border:1px solid #333!important;
+	width: 10%!important;
+	margin: 5px 0;
+}
+#iscwhb{
+	width: 16px!important;
+	height: 16px;
+	margin-right: 5px;
+	border: none!important;
+}
+#isTjcwhb{
+	width: 16px!important;
+	height: 16px;
+	margin-right: 5px;
+	border: none!important;
+}
+.dwyj{
+	width: 80%!important;
+	max-width: 80%!important;
+	height: 45px!important;
+	max-height: 45px!important;
+	border: 1px solid #333!important;
+	vertical-align: text-top!important;
+}
+.apqk{
+	width: 995px;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	padding: 10px;
+	overflow: hidden;
+}
+#apzt1,#apzt2{
+	display: inline-block;
+}
+#apzt1 input,#apzt2 input{
+	width: 110px!important;
+}
+.sjStateDiv input{
+	width: 110px!important;
+}
+.benjieTit{
+	margin-bottom: 10px;
+}
+.benjieCon{
+	display: inline-block;
+	border: 1px solid #ccc;
+}
+.shangjie,.benjie{
+	float: left;	
+}
+.benjie{
+	width: 60%;
+	padding: 10px 0 10px 10px;
+}
+.shangjie{
+	width: 36%;
+	padding: 10px 0 10px 0px;
+}
+.zxtjDiv{
+	width:1015px;
+	margin-left: 10px;
+	
+}
+.zxtjDiv .benjieTab tr{
+	height: 50px;
+}
+
+
+.benjieTab{
+	border: none!important;
+    width: 100%!important;
+    margin-left: 0!important;
+}
+.benjieCon{
+	width: 95%;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 39px;
+}
+.benjieTab td{
+	height: 35px!important;
+	border: none!important;
+    text-align: left;
+}
+.benjieTab select{
+    width: 290px!important;
+    border: 1px solid!important;
+	margin: 5px 0;
+}
+.benjieTab input{
+    border: 1px solid!important;
+}
+#TB61_post_select,#TB61_sjPost_select{
+	width: 110px!important;
+	margin-right: 5px;
+}
+input.checkInput{
+	width: 16px!important;
+	height: 16px!important;
+	margin: 0\9;
+	padding: 0\9;
+}
+#zxapCwhb,#isFmsz>input,#sjIssecretary{
+	border: none\9;
+}
+#postsort,#cwhbpostsort,#zwhFzrSort{
+	width: 25px!important;
+	padding: 0;
+	margin-right: 5px;
+}
+.cwhbLab{
+	margin-right: 5px;
+}
+#TB09A_bztmBzapReason_select{
+	width: 110px!important;	
+}
+#ssjb,#zwh{
+	width: 150px!important;
+}
+#CODEZXTSF_zxtsf_select{
+	width: 148px!important;
+}
+#zxapRzbdDate{
+	vertical-align: middle;
+}
+#rzbddate{
+	vertical-align: bottom;
+}
+#TB67_zwhpost_select,#CODEJPRSF_jprsf_select#TB67_zwhpost_select, #CODEJPYSF_jprsf_select,#rzbddate{
+	width: 90px!important;
+}
+#lrjs{
+	width: 146px!important;
+}
+#zwh,#CODEZXTSF_zxtsf_select{
+	margin-right: 10px!important;
+}
+#apremark{
+    width: 328px;
+    height: 50px;
+    max-width: 328px;
+    max-height: 50px;
+    border: 1px solid;
+    margin-top: 10px;
+}
+.shangjieCon{
+	width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px 0 0 10px;
+    height: 354px;
+}
+.shangjieTab{
+	height: 40px;
+}
+select.sjapzw{
+	margin-right: 10px;
+}
+select.sjapzw,#sjSsjb,#sjPoststate1{
+	width: 110px!important;
+}
+.sjlj{
+	text-align: center;
+	margin-top: 10px;
+}
+.sjlj a{
+	margin: 0 10px;
+	text-decoration: underline;
+}
+.sjlj a:focus{
+	outline: 1px dotted #ccc;
+}
+.rxtjqkTab select,.apqk select{
+/*	padding-top: 4px\9;
+	vertical-align: middle;*/
+}
+#bztm_bzap_div{
+	display: inline-block;
+	margin-left: 10px;
+}
+/*淇敼浜洪�夋牱寮�*/

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.framework.system.dao.FieldInstructionDao">
+    
+	<sql id="fieldInstructionColumns">
+		a.id AS "id",
+		a.data_type AS "dataType",
+		a.module_type AS "moduleType",
+		a.field_code AS "fieldCode",
+		a.field_name AS "fieldName",
+		a.instruction AS "instruction",
+		a.sort AS "sort",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="fieldInstructionJoins">
+	</sql>
+    
+	<select id="get" resultType="FieldInstruction">
+		SELECT 
+			<include refid="fieldInstructionColumns"/>
+		FROM sys_field_instruction a
+		<include refid="fieldInstructionJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="FieldInstruction">
+		SELECT 
+			<include refid="fieldInstructionColumns"/>
+		FROM sys_field_instruction a
+		<include refid="fieldInstructionJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="dataType != null and dataType != ''">
+			    AND (data_type = #{dataType} OR data_type = '00')
+			</if>
+			<if test="dataTypeSearch != null and dataTypeSearch != ''">
+			    AND data_type = #{dataTypeSearch}
+			</if>
+			<if test="dataTypeSearch == '01'">
+			    AND module_type = #{moduleTypeSearch}
+			</if>
+		</where>
+		ORDER BY a.SORT asc
+	</select>
+	<select id="selectAll" resultType="FieldInstruction">
+		SELECT 
+			a.id AS "sId",
+			a.data_type AS "dataTypeSearch",
+			a.module_type AS "moduleTypeSearch",
+			a.field_code AS "fieldCode",
+			a.field_name AS "fieldName",
+			a.instruction AS "instruction",
+			a.sort AS "sort",
+			a.create_by AS "createBy.id",
+			a.create_date AS "createDate",
+			a.update_by AS "updateBy.id",
+			a.update_date AS "updateDate",
+			a.remarks AS "remarks",
+			a.del_flag AS "delFlag"
+		FROM sys_field_instruction a
+		WHERE del_flag = '0' 
+		ORDER BY a.data_type,a.module_type asc
+	</select>
+	
+	<select id="findAllList" resultType="FieldInstruction">
+		SELECT 
+			<include refid="fieldInstructionColumns"/>
+		FROM sys_field_instruction a
+		<include refid="fieldInstructionJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+			ORDER BY a.SORT asc	
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_field_instruction(
+			id,
+			data_type,
+			module_type,
+			field_code,
+			field_name,
+			instruction,
+			sort,
+			create_by,
+			create_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{dataType},
+			#{moduleType},
+			#{fieldCode},
+			#{fieldName},
+			#{instruction},
+			#{sort},
+			#{createBy.id},
+			#{createDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_field_instruction SET 	
+			data_type = #{dataType},
+			module_type = #{moduleType},
+			field_code = #{fieldCode},
+			field_name = #{fieldName},
+			instruction = #{instruction},
+			sort = #{sort},
+			
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sys_field_instruction SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

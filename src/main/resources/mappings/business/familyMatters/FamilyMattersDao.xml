@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.business.familyMatters.dao.FamilyMattersDao">
+  <resultMap id="BaseResultMap" type="com.tfkj.business.familyMatters.entity.FamilyMatters">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="a0101" jdbcType="VARCHAR" property="name" />
+    <result column="a0157" jdbcType="VARCHAR" property="company" />
+    <result column="A0215A" jdbcType="VARCHAR" property="post" />
+    <result column="a0184" jdbcType="VARCHAR" property="idNumber" />
+    <result column="FR_MATTERS" jdbcType="VARCHAR" property="matters" />
+    <result column="FR_HOLDING" jdbcType="VARCHAR" property="holding" />
+    <result column="FR_FETETIME" jdbcType="VARCHAR" property="feteTime" />
+    <result column="FR_CITY" jdbcType="VARCHAR" property="city" />
+    <result column="FR_FETEPLACE" jdbcType="VARCHAR" property="fetePlace" />
+    <result column="FR_FETESCALE" jdbcType="VARCHAR" property="feteScale" />
+    <result column="FR_ATTENDANTS" jdbcType="VARCHAR" property="attendants" />
+    <result column="FR_AMOUNT" jdbcType="VARCHAR" property="amount" />
+    <result column="FR_GIFTAMOUNT" jdbcType="VARCHAR" property="giftAmount" />
+    <result column="FR_FETEAMOUNT" jdbcType="VARCHAR" property="feteAmount" />
+    <result column="FR_FETECOST" jdbcType="VARCHAR" property="feteCost" />
+    <result column="FR_OTHERCOST" jdbcType="VARCHAR" property="otherCost" />
+    <result column="FR_TOTALCOST" jdbcType="VARCHAR" property="totalCost" />
+    <result column="FR_FETESTANDARDS" jdbcType="VARCHAR" property="feteStandards" />
+    <result column="FR_FETEPEOPLE" jdbcType="VARCHAR" property="fetePeople" />
+    <result column="FR_INSTRUCTION" jdbcType="VARCHAR" property="instruction" />
+    <result column="FR_TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+  	ID,a0101,a0157,A0215A,a0184,FR_MATTERS,FR_HOLDING,FR_FETETIME,FR_CITY,FR_FETEPLACE,FR_FETESCALE,FR_ATTENDANTS,FR_AMOUNT,FR_GIFTAMOUNT,FR_FETEAMOUNT,
+  	FR_FETECOST,FR_OTHERCOST,FR_TOTALCOST,FR_FETESTANDARDS,FR_FETEPEOPLE,FR_INSTRUCTION,FR_TYPE,CREATE_BY,CREATE_DATE,UPDATE_BY,UPDATE_DATE,DEL_FLAG
+  </sql>
+  
+  <select id="findList" parameterType="com.tfkj.business.familyMatters.entity.FamilyMatters" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" /> 
+    from tbl_family_registration 
+    where DEL_FLAG = '0' 
+      <if test="type !=null and type != ''">
+          AND FR_TYPE = #{type}
+      </if>
+      <if test="name !=null and name != ''">
+          AND a0101 LIKE CONCAT('%', #{name},'%')
+      </if>
+      <if test="company !=null and company != ''">
+          AND a0157 LIKE CONCAT('%', #{company},'%')
+      </if>
+      <if test="matters !=null and matters != ''">
+          AND FR_MATTERS LIKE CONCAT('%', #{matters},'%')
+      </if>
+      <if test="holding !=null and holding != ''">
+          AND FR_HOLDING LIKE CONCAT('%', #{holding},'%')
+      </if>
+      <if test="feteTime !=null and feteTime != ''">
+          AND  STR_TO_DATE(FR_FETETIME,'%Y-%m-%d') &gt;= STR_TO_DATE(#{feteTime},'%Y-%m-%d')
+      </if>
+      <if test="feteEndTime !=null and feteEndTime != ''">
+          AND STR_TO_DATE(FR_FETETIME,'%Y-%m-%d') &lt;= STR_TO_DATE(#{feteEndTime},'%Y-%m-%d')
+      </if>
+  </select>
+  
+  <insert id="insert" parameterType="com.tfkj.business.familyMatters.entity.FamilyMatters">
+    insert into tbl_family_registration (<include refid="Base_Column_List" />) 
+    values (#{id}, #{name}, #{company},#{post},#{idNumber}, #{matters},#{holding},#{feteTime}, #{city},#{fetePlace}, #{feteScale}, #{attendants},#{amount}, #{giftAmount}, #{feteAmount},#{feteCost}, #{otherCost}, #{totalCost},#{feteStandards}, #{fetePeople}, #{instruction}, #{type}, #{createBy.id}, #{createDate,jdbcType=TIMESTAMP}, #{updateBy.id},#{updateDate,jdbcType=TIMESTAMP},#{delFlag})
+  </insert>
+  
+  <select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+ 	select <include refid="Base_Column_List" /> 
+    from tbl_family_registration 
+    where id = #{id,jdbcType=VARCHAR} and DEL_FLAG='0'
+  </select>
+  
+  <delete id="delete" parameterType="com.tfkj.business.familyMatters.entity.FamilyMatters">
+    UPDATE tbl_family_registration SET tbl_family_registration.DEL_FLAG = '1'
+    where
+    <choose>
+      <when test="id != null and id !=''">
+        ID = #{id}
+      </when>
+      <otherwise>
+        1=2
+      </otherwise>
+    </choose>
+  </delete>
+  
+  <update id="updateFamilyMatters" parameterType="com.tfkj.business.familyMatters.entity.FamilyMatters">
+       update tbl_family_registration
+	    　<trim prefix="set" suffixOverrides=",">
+	        <if test="name != null">
+	            a0101 = #{name},
+	        </if>
+	        <if test="company != null">
+	            a0157 = #{company},
+	        </if>
+	        <if test="post != null">
+	            A0215A = #{post},
+	        </if>
+	        <if test="idNumber != null">
+	            a0184 = #{idNumber},
+	        </if>
+	        <if test="matters != null">
+	            FR_MATTERS = #{matters},
+	        </if>
+	        <if test="holding != null">
+	            FR_HOLDING = #{holding},
+	        </if>
+	        <if test="feteTime != null">
+	            FR_FETETIME = #{feteTime},
+	        </if>
+	        <if test="city != null">
+	            FR_CITY = #{city},
+	        </if>
+	        <if test="fetePlace != null">
+	            FR_FETEPLACE = #{fetePlace},
+	        </if>
+	        <if test="feteScale != null">
+	            FR_FETESCALE = #{feteScale},
+	        </if>
+	        <if test="attendants != null">
+	            FR_ATTENDANTS = #{attendants},
+	        </if>
+	        <if test="amount != null">
+	            FR_AMOUNT = #{amount},
+	        </if>
+	        <if test="giftAmount != null">
+	            FR_GIFTAMOUNT = #{giftAmount},
+	        </if>
+	        <if test="feteAmount != null">
+	            FR_FETEAMOUNT = #{feteAmount},
+	        </if>
+	        <if test="feteCost != null">
+	            FR_FETECOST = #{feteCost},
+	        </if>
+	        <if test="otherCost != null">
+	            FR_OTHERCOST = #{otherCost},
+	        </if>
+	        <if test="totalCost != null">
+	            FR_TOTALCOST = #{totalCost},
+	        </if>
+	        <if test="feteStandards != null">
+	            FR_FETESTANDARDS = #{feteStandards},
+	        </if>
+	        <if test="fetePeople != null">
+	            FR_FETEPEOPLE = #{fetePeople},
+	        </if>
+	        <if test="instruction != null">
+	            FR_INSTRUCTION = #{instruction},
+	        </if>
+	        <if test="type != null">
+	            FR_TYPE = #{type},
+	        </if>
+	        <if test="updateDate != null">
+	            UPDATE_DATE = getdate(),
+	        </if>
+	        <if test="delFlag != null">
+	            DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+	        </if>
+	    </trim>
+        where ID = #{id}
+    </update>
+  
+</mapper>

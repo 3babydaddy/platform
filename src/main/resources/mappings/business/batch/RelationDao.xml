@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.business.batch.dao.RelationDao">
+  <resultMap id="BaseResultMap" type="com.tfkj.business.batch.entity.Relation">
+ 
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CB_ID" jdbcType="VARCHAR" property="cbId" />
+    <result column="PZ_ID" jdbcType="VARCHAR" property="pzId" />
+    <result column="CREATE_DATE" jdbcType="VARCHAR" property="createDate" />
+  </resultMap>
+  <resultMap id="satgeResultMap" type="com.tfkj.business.ywgl.entity.InstructionsElement">
+
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="remindersDate" jdbcType="VARCHAR" property="remindersDate" />
+    <result column="unqId" jdbcType="VARCHAR" property="unqId" />
+    <result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+    <result column="IN0001" jdbcType="VARCHAR" property="parentIn0001" />
+    <result column="IN0002" jdbcType="VARCHAR" property="parentIn0002" />
+    <result column="IN0003" jdbcType="LONGVARCHAR" property="parentIn0003" />
+    <result column="IN0004" jdbcType="TIMESTAMP" property="parentIn0004" />
+    <result column="IN0005" jdbcType="TIMESTAMP" property="parentIn0005" />
+    <result column="IN0006" jdbcType="VARCHAR" property="parentIn0006" />
+    <result column="IN0007" jdbcType="VARCHAR" property="parentIn0007" />
+    <result column="IN0008" jdbcType="VARCHAR" property="parentIn0008" />
+    <result column="IN0009" jdbcType="LONGVARCHAR" property="parentIn0009" />
+    <result column="IN0010" jdbcType="LONGVARCHAR" property="parentIn0010" />
+    <result column="IN0011" jdbcType="VARCHAR" property="parentIn0011" />
+    <result column="IN0012" jdbcType="VARCHAR" property="parentIn0012" />
+    <result column="IN0013" jdbcType="VARCHAR" property="parentIn0013" />
+    <result column="IN0014" jdbcType="VARCHAR" property="parentIn0014" />
+    <result column="IN0016" jdbcType="VARCHAR" property="parentIn0016" />
+    <result column="IN0017" jdbcType="VARCHAR" property="parentIn0017" />
+    <result column="IN0018" jdbcType="VARCHAR" property="parentIn0018" />
+    <result column="IN0019" jdbcType="VARCHAR" property="parentIn0019" />
+    <result column="in0020Text" jdbcType="VARCHAR" property="parentIn0020Text" />
+    <result column="in0020Id" jdbcType="VARCHAR" property="parentIn0020Id" />
+    <result column="officeName" jdbcType="LONGVARCHAR" property="parentIn0009Text" />
+    <result column="leaderName" jdbcType="LONGVARCHAR" property="parentIn0010Text" />
+
+    <result column="OIN0001" jdbcType="TIMESTAMP" property="parentIn0011" />
+    <result column="OIN0002" jdbcType="VARCHAR" property="parentIn0012" />
+    <result column="OIN0003" jdbcType="VARCHAR" property="parentIn0013" />
+    <result column="OIN0004" jdbcType="LONGVARCHAR" property="parentIn0014" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CB_ID,PZ_ID,CREATE_DATE
+  </sql>
+  <sql id="Instructions_Column_List">
+  a.ID as DATA_ID,
+  a. IN0001,a. IN0002,a.IN0003,a.IN0004,a. IN0005,a. IN0006,a. IN0007,a. IN0008,
+  a.IN0009,a. IN0010,a.IN0011,a. IN0012,a.IN0013,a. IN0014,a. IN0016,a. IN0017,a. IN0018,a. IN0019
+</sql>
+<sql id="InstructionsElement_office_List">
+o.ID AS OID,o.DATA_ID AS ODATA_ID,o.OFFICE_ID AS officeId,o.LEADER_ID AS leaderId,o.TYPE AS OTYPE,o.TYPE AS TYPE,o.ID AS ID,
+o.FILE_PATH AS OFILE_PATH,o.SORT AS OSORT,o.CREATE_BY AS OCREATE_BY,o.CREATE_DATE AS OCREATE_DATE,
+o.UPDATE_BY AS OUPDATE_BY,o.UPDATE_DATE AS OUPDATE_DATE,o.REMARKS AS OREMARKS,o.DEL_FLAG AS ODEL_FLAG,
+o.IN0001 AS OIN0001,o.IN0002 AS OIN0002,o.IN0003 AS OIN0003,o.IN0004 AS OIN0004,o.IN0005 AS OIN0005,
+o.IN0006 AS OIN0006,o.IN0007 AS OIN0007,o.IN0008 AS OIN0008,o.IN0009 AS OIN0009,o.IN0010 AS OIN0010,
+o.IN0011 AS OIN0011,o.IN0012 AS OIN0012,o.IN0013 AS OIN0013,o.IN0014 AS OIN0014,o.IN0015 AS OIN0015
+</sql>
+    <select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from batch_reminders
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="findRelationList" parameterType="com.tfkj.business.batch.entity.Relation" resultMap="BaseResultMap">
+    SELECT * FROM batch_relation WHERE CB_ID IN ( SELECT ID FROM batch_reminders WHERE REMINDERS_DATE = #{remindersDate}  AND PZ_ID = #{pzId})
+    </select>
+
+    <select id="findPageList" parameterType="com.tfkj.business.ywgl.entity.Instructions" resultType="com.tfkj.business.ywgl.entity.Instructions">
+
+      SELECT
+      <choose>
+        <when test="relationType!=null and relationType !=1">
+          IFNULL(CONCAT(REMINDERS_DATE, o.OFFICE_ID),'') unqId
+        </when>
+        <otherwise>
+          IFNULL(CONCAT(REMINDERS_DATE, o.LEADER_ID),'')  unqId
+        </otherwise>
+      </choose>
+      FROM
+      batch_reminders rem LEFT JOIN batch_relation rel ON  rem.ID = rel.CB_ID LEFT JOIN  ywgl_instructions_element o
+      ON o.ID = rel.PZ_ID  LEFT JOIN  ywgl_instructions a ON a.ID = o.DATA_ID
+      WHERE  a.DEL_FLAG = '0' AND o.DEL_FLAG = '0'
+
+    <if test="relationType!=null and relationType!=''">
+      AND o.TYPE = #{relationType}
+    </if>
+
+      <choose>
+        <when test="relationType!=null and relationType !=1">
+          GROUP BY CONCAT(REMINDERS_DATE,o.OFFICE_ID)
+        </when>
+        <otherwise>
+          GROUP BY CONCAT(REMINDERS_DATE,o.LEADER_ID)
+        </otherwise>
+      </choose>
+
+      ORDER BY
+      <choose>
+        <when test="relationType!=null and relationType !=1">
+          IFNULL(CONCAT(REMINDERS_DATE, o.OFFICE_ID),'')
+        </when>
+        <otherwise>
+         IFNULL(CONCAT(REMINDERS_DATE, o.LEADER_ID),'')
+        </otherwise>
+      </choose>
+    </select>
+
+  <select id="findAllList" parameterType="com.tfkj.business.ywgl.entity.InstructionsElement"  resultMap="satgeResultMap">
+    SELECT
+    <choose>
+      <when test="relationType!=null and relationType !=1">
+        IFNULL(CONCAT(REMINDERS_DATE, o.OFFICE_ID),'') unqId,
+      </when>
+      <otherwise>
+        IFNULL(CONCAT(REMINDERS_DATE, o.LEADER_ID),'')  unqId,
+      </otherwise>
+    </choose>
+    REMINDERS_DATE as remindersDate,
+    <include refid="Instructions_Column_List" />
+    ,rem.ID as remindersId,rel.ID  AS relationId,
+    <include refid="InstructionsElement_office_List" />,
+    (SELECT office.NAME FROM sys_office office WHERE office.ID = o.OFFICE_ID LIMIT 0,1) AS officeName,
+    (SELECT leader.l001 FROM sys_leader leader WHERE leader.ID = o.LEADER_ID LIMIT 0,1) AS leaderName
+    FROM
+    batch_reminders rem
+    , batch_relation rel, ywgl_instructions_element o, ywgl_instructions a
+    WHERE rem.ID = rel.CB_ID
+    AND o.ID = rel.PZ_ID AND a.ID = o.DATA_ID
+    <if test="relationType!=null and relationType!=''">
+      AND o.TYPE = #{relationType}
+    </if>
+    AND a.DEL_FLAG = '0'
+    AND o.DEL_FLAG = '0'
+    <if test="parentIn0001 != null and parentIn0001 != ''">
+      AND a.in0001 LIKE CONCAT('%', #{parentIn0001},'%')
+    </if>
+
+    <choose>
+      <when test="relationType!=null and relationType !=1">
+        and IFNULL(CONCAT(REMINDERS_DATE, o.OFFICE_ID),'')  in (${unqId})
+      </when>
+      <otherwise>
+        and IFNULL(CONCAT(REMINDERS_DATE, o.LEADER_ID),'') in (${unqId})
+      </otherwise>
+    </choose>
+    <!-- 批示时间 -->
+    <if test="parentIn0004Start != null and parentIn0004Start != '' ">
+      <![CDATA[
+    			AND   a.in0004 >= #{parentIn0004Start,jdbcType=TIMESTAMP}
+    ]]>
+    </if>
+    <if test="parentIn0004End != null and parentIn0004End != '' ">
+      <![CDATA[
+     			AND   a.in0004 <= #{parentIn0004End,jdbcType=TIMESTAMP}
+     ]]>
+    </if>
+    <!-- 文件号 -->
+    <if test="in0002 != null and in0002 != ''">
+      AND a.in0002 LIKE CONCAT('%', #{in0002},'%')
+    </if>
+    <!-- 批示内容 -->
+    <if test="in0003 != null and in0003 != ''">
+      AND a.in0003 LIKE CONCAT('%', #{in0003},'%')
+    </if>
+    <!-- 催办时间 -->
+    <if test="parentIn0011Start != null and parentIn0011Start != '' ">
+      <![CDATA[
+    			AND  STR_TO_DATE(REMINDERS_DATE,'%Y-%m-%d') >= #{parentIn0011Start,jdbcType=TIMESTAMP}
+    ]]>
+    </if>
+    <if test="parentIn0011End != null and parentIn0011End != '' ">
+      <![CDATA[
+     			AND  STR_TO_DATE(REMINDERS_DATE,'%Y-%m-%d')  <= #{parentIn0011End,jdbcType=TIMESTAMP}
+     ]]>
+    </if>
+
+    <!-- 责任领导 -->
+    <if test="leaderIds != null and leaderIds != ''">
+      AND o.LEADER_ID = #{leaderIds}
+    </if>
+    <!-- 承办单位 -->
+    <if test="officeIds != null and officeIds != ''">
+      AND  o.OFFICE_ID = #{officeIds}
+    </if>
+    <!-- 批示类型 -->
+    <if test=" type != null and type != ''">
+      AND a.type LIKE CONCAT('%', #{type},'%')
+    </if>
+    <!-- 是否超期 -->
+      <if test=" in0013 != null and in0013 != ''">
+      AND o.IN0003 = #{in0013}
+    </if>
+    <!-- 办理情况 -->
+    <if test=" in0012 != null and in0012 != ''">
+      AND o.IN0002 = #{in0012}
+    </if>
+    <!-- 年度 -->
+    <if test="taskYear != null  and taskYear != ''">
+      AND REMINDERS_DATE  LIKE CONCAT('%', #{taskYear},'%')
+    </if>
+    <!-- 落实及上报情况 -->
+    <if test="in0014 != null  and in0014 != ''">
+      AND (o.IN0004 LIKE CONCAT('%', #{in0014},'%') )
+    </if>
+    <!-- 来源 -->
+    <if test="parentIn0017 != null  and parentIn0017 != ''">
+      AND a.in0017 = #{parentIn0017}
+    </if>
+
+
+    ORDER BY
+    <choose>
+      <when test="relationType!=null and relationType !=1">
+         IFNULL(CONCAT(REMINDERS_DATE, o.OFFICE_ID),'')
+      </when>
+      <otherwise>
+         IFNULL(CONCAT(REMINDERS_DATE, o.LEADER_ID),'')
+      </otherwise>
+    </choose>
+  </select>
+    <select id="findList" parameterType="com.tfkj.business.batch.entity.Relation" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from batch_relation
+    where  1 = 1
+      <if test="id !=null and id != ''">
+          AND ID = #{id}
+      </if>
+    <if test="pzId !=null and pzId != ''">
+      AND PZ_ID = #{pzId}
+    </if>
+    <if test="cbId !=null and cbId != ''">
+      AND CB_ID = #{cbId}
+    </if>
+  </select>
+
+  <insert id="insert" parameterType="com.tfkj.business.batch.entity.Relation">
+    insert into batch_relation (
+       ID, CB_ID,PZ_ID,CREATE_DATE,TYPE)
+    values (#{id}, #{cbId},  #{pzId},  #{createDate,jdbcType=TIMESTAMP},#{type})
+  </insert>
+
+  <update id="update" parameterType="com.tfkj.business.batch.entity.Relation">
+    update batch_relation
+  　<trim prefix="set"  suffixOverrides=",">
+      <if test="cbId != null">
+        CB_ID = #{cbId},
+      </if>
+      <if test="pzId != null">
+        PZ_ID = #{pzId},
+      </if>
+    <if test="type != null">
+      TYPE = #{type},
+    </if>
+    </trim>
+    where ID = #{id}
+  </update>
+
+  <delete id="deleteRelation" parameterType="com.tfkj.business.ywgl.entity.InstructionsElement" >
+    DELETE  FROM batch_relation WHERE  ID = #{relationId}
+  </delete>
+  <delete id="deleteReminders" parameterType="com.tfkj.business.ywgl.entity.InstructionsElement" >
+    DELETE  FROM batch_reminders WHERE  ID = #{remindersId}
+  </delete>
+</mapper>

@@ -1,0 +1,518 @@
+/*select2框架css已弃用*/
+.select2-container a,.select2-container span{
+	border: none!important;
+	background-image: none!important;
+	background-color: #fff!important;
+}
+.select2-container a{
+	padding-left: 0px!important;
+	background-color: #fff!important;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff',endColorstr = '#ffffff',GradientType = 0)!important;
+}
+
+.select2-container abbr{
+	background-color: #fff!important;
+	background-image: none!important;
+}
+.select2-container span b{
+	background-image: none!important;
+	background-color: #fff!important;
+}
+/*select2框架css已弃用*/
+/*公共样式*/
+*{
+	margin: 0;
+	padding: 0;
+}
+* {
+    font-size: 14px;
+}
+body{
+/* 	font-family: "宋体",Tahoma,Arial; */
+}
+ul li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+.table-form{
+	text-align: center;
+	width: 870px;
+	border-color: #000;
+	table-layout: fixed;
+	margin-bottom:40px;
+}
+.table-form td{
+	vertical-align: middle;
+	height: 35px;
+	border-color: #000;
+}
+tbody{
+	border: 2px solid #000;
+}
+/*公共样式*/
+.fw-bd{/*标题字体加粗*/
+	color: #000;
+	font-weight: bold;
+/* 	font-size: 12px; */
+}
+.table-form td input[type="text"]{/*表格input框样式*/
+	text-align: left;
+	text-indent: 3px;
+	text-overflow: ellipsis;
+	width: 100%;
+	height: 99%;
+	line-height: 34px;
+	vertical-align: middle;
+	margin: 0 auto;
+	padding: 0;
+	font-size: 14px;
+/* 	border: 1px solid #c5c9d0; */
+	border: none;
+	color:#444;
+/* 	float: left; */
+	white-space: nowrap;
+	overflow: hidden;
+}
+.table-form td select{/*表格下拉框样式*/
+	text-align: left;
+	padding:0;
+	padding/*\**/:8px 0\9;
+	text-overflow: ellipsis;
+	width: 100%;
+	height: 100%;
+	height: auto\9;
+	line-height: 34px;
+	vertical-align: middle;
+	font-size: 14px;
+/* 	border: 1px solid #c5c9d0; */
+	border: none;
+	color:#444;
+	float:left;
+	overflow: hidden;
+	white-space: nowrap;
+}
+/*公共样式*/
+.table-tit-wid{/*表头td宽度样式*/
+	width: 88px;
+}
+.table-cont-wid{/*表格内容td宽度样式*/
+	width: 175px;
+}
+.tit-border{/*表头边框*/
+	border: 1px solid #000;
+}
+.textarea-hei{/*富文本高度*/
+	height: 92px!important;
+}
+.textarea-hei textarea{/*富文本样式*/
+	width: 99%;
+	max-width:99%;
+	height: 99%\9;
+	max-height: 92px;
+/* 	margin: 10px auto; */
+	padding: 0 0 0 5px;
+	border: none;
+	font-size:14px;
+	color:#444;
+}
+.czfhh{/*长字符换行*/
+	padding: 0 51px; /*针对字符宽度太长的设置*/
+}
+
+.td-qtwzfs div{/*其他问责方式*/
+	text-align: left;
+	width: 100%;
+	display:inline-block;
+}
+/*处分问责下的checkbox的div*/
+.td-wtlx div{ /*处分问责的问题类型下的checkbox的div*/
+	text-align: left;
+	width: 195px;
+	display:inline-block;
+}
+
+.td-hx-zdwt div{/*函询*/
+	text-align: left;
+	width: 100%;
+	display:inline-block;
+}
+.td-jm-zdwt div{/*诫勉*/
+	text-align: left;
+	width: 100%;
+	display:inline-block;
+}
+
+td.checkboxes{
+	text-align: left;
+/* 	padding-left: 5px; */
+}
+.checkboxes div input{/*复选框垂直居中*/
+	vertical-align: middle;
+}
+.checkboxes div label{
+	font-family: "微软雅黑";
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 12px;
+    _font-size: 12px;
+    font-weight: normal;
+    line-height: 20px;
+    vertical-align: middle;
+}
+/*处分问责下的checkbox的div*/
+/*记实登记选项卡整体表格样式*/
+.tabbable{
+	display: inline-block;
+}
+/*记实登记选项卡整体表格样式*/
+.tishixinxi{/*右边提示信息样式*/
+	padding:0;
+	background-color: #fff;
+	color: #333;
+/* 	font-size:12px; */
+	border: 1px solid #fff;
+	width: 230px;
+	height: auto;
+/* 	display: inline; */
+	vertical-align: top;
+	margin-bottom: 0;
+	margin-left:5px;
+	float:left;
+	position:fixed;
+	left:883px;
+	top: 80px;
+}
+#inputForm{/*整个form表单样式*/
+	display: inline-block;
+	float:left;
+	margin-left: 13px;
+}
+
+
+/*记实登记页签切换样式*/
+body, label, input, button, select, textarea, .uneditable-input, .navbar-search .search-query{
+	font-family: "微软雅黑";
+}
+a{
+	color: #dd4814;
+	outline: none;
+}
+/*bootstrap自带选项卡样式*/
+.nav-tabs > li, .nav-pills > li {
+    float: left;
+}
+.nav-tabs li a {
+    padding-left: 6px;
+    padding-right: 7px;
+}
+/*bootstrap自带选项卡样式*/
+/*bootstrap自带面包屑导航条样式，即页面内顶部标题*/
+.breadcrumb {
+    padding: 8px 15px;
+    margin: 0 0 20px;
+    list-style: none;
+    background-color: #f5f5f5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.breadcrumb > li {
+    display: inline-block;
+    text-shadow: 0 1px 0 #ffffff;
+}
+/*bootstrap自带面包屑导航条样式，即页面内顶部标题*/
+/*工具条*/
+#toolbar {
+    margin-left: 3px;
+    vertical-align: middle;
+}
+/*工具条*/
+/*bootstrap自带选项卡样式修改，即页面内顶部标题*/
+.nav-tabs {
+    margin-top: 2px;
+    margin-left: 13px;
+}
+.nav-tabs-custom {
+    background-color: #f5f5f5;
+}
+.nav, .breadcrumb {
+    margin-bottom: 2px;
+}
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+    margin-left:12px!important;
+}
+.nav-tabs, .nav-pills {
+}
+.nav {
+    margin-left: 0;
+    list-style: none;
+}
+li {
+    line-height: 20px;
+}
+.nav-tabs > li > a, .nav-pills > li > a {
+    margin-right: 2px;
+    line-height: 14px;
+}
+.nav-pills > li > a {
+    padding-right: 12px;
+    padding-left: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.nav-tabs > li > a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 20px;
+    border: 1px solid transparent;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+.nav > li > a {
+    display: block;
+    cursor: pointer;
+}
+.nav-tabs:before, .nav-pills:before, .nav-tabs:after, .nav-pills:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.nav-tabs:after, .nav-pills:after {
+    clear: both;
+}
+.nav-tabs:before, .nav-pills:before, .nav-tabs:after, .nav-pills:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.form-horizontal {
+    margin: 0 0px;
+}
+/*bootstrap自带选项卡样式修改，即页面内顶部标题*/
+/*整个表格内部不出滚动条*/
+.tab-content {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+/*整个表格内部不出滚动条*/
+table {
+    max-width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+/*divider为分隔线*/
+.breadcrumb > li > .divider {
+    padding: 0 5px;
+    color: #ccc;
+}
+/*divider为分隔线*/
+/*面包屑导航条内被点击时活跃字体样式，为框架内自带样式*/
+.breadcrumb > .active {
+    color: #999999;
+}
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
+    color: #555555;
+    cursor: default;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+/*面包屑导航条内被点击时活跃字体样式，为框架内自带样式*/
+textarea{/*文本输入框禁用滚动条*/
+	overflow-x: hidden;
+    overflow-y: hidden;
+}
+/*记实登记页签切换样式*/
+textarea:focus, select:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus{
+	outline:0 \9;
+}
+/*业务管理页面报警星星的字体大小*/
+.yellowSpan,.redSpan{
+	font-family: "微软雅黑";
+	font-size: 12px;
+}
+.promptSpan{
+	vertical-align: middle;
+}
+/* 记实登记双党派的样式 */
+#a3920show{
+	vertical-align:text-bottom;
+	margin: 0;
+	width: 14px;
+	height: 14px;
+	outline: none;
+}
+/* 出生日期td框的样式 */
+.birthTd{
+	text-align:left;
+	line-height: 30px;
+}
+/*记实登记任职资格模块考核结果是否均为称职以上等次字段样式*/
+#ruleServeLimit{
+    width: 18px;
+    display: inline-block;
+    border-bottom: 1px solid;
+    height: 15px;
+    line-height: 15px;
+    vertical-align: middle;
+}
+/* 记实登记人员信息模块出生日期后面的年龄亮灯样式单独控制 */
+span#red_a0120,span#yellow_a0120{
+	left:70%!important;
+	top:9%!important;
+}
+/* 记实登记任职资格模块任原职务层次时间后面的年份亮灯样式单独控制 */
+span#red_a52z117,span#yellow_a52z117{
+	left:70%!important;
+/* 	top:10%!important; */
+}
+/* 记实登记民主推荐模块会议推荐的亮灯样式单独控制 */
+span#red_a52z41401a,span#yellow_a52z41401a{
+	left: 77%!important;
+    top: 34%!important;
+}
+/* 记实登记民主推荐模块个别谈话推荐的亮灯样式单独控制 */
+span#red_a52z41401b,span#yellow_a52z41401b{
+	left: 85%!important;
+    top: 37%!important;
+}
+/* 记实登记民主推荐模块会议推荐样式单独控制 */
+span#fi_a52z41401a{
+    position: absolute;
+    left: 26%;
+    top: 31%;
+    top: 5px\9;
+}
+/* 记实登记民主推荐模块个别谈话推荐样式单独控制 */
+span#fi_a52z41401b{
+	position: absolute;
+    left: 13%;
+    top: 35%;
+    top: 5px\9;
+}
+/* 记实登记确定考察对象模块是否存在下列情况之一亮灯样式单独控制 */
+span#red_a52z671,span#yellow_a52z671{
+	top: 38%!important;
+}
+/* 记实登记有关事项报告模块事先批报事项亮灯样式单独控制 */
+span#red_a52z801a,span#yellow_a52z801a{
+	left: 70%!important;
+    top: 36%!important;
+}
+/* 记实登记有关事项报告模块事先批报事项样式单独控制 */
+span#fi_a52z801a{
+    position: absolute;
+    left: 33%;
+    top: 40%
+}
+/* 记实登记有关事项报告模块征求意见事项样式单独控制 */
+span#fi_a52z801b{
+	position: absolute;
+    left: 33%;
+    top: 40%
+}
+/* 记实登记有关事项报告模块征求意见事项亮灯样式单独控制 */
+span#red_a52z801b,span#yellow_a52z801b{
+	left: 70%!important;
+    top: 36%!important;
+}
+/* 记实登记讨论决定模块非中共党员拟任人选是否征求统战部门和民主党派工商联主要领导成员无党派代表人士的意见亮灯样式单独控制 */
+span#red_a52z911,span#yellow_a52z911,span#red_a52z907,span#yellow_a52z907{
+    top: 30%!important;
+}
+/* 记实登记公示模块是否公示亮灯样式单独控制 */
+span#red_a52z1001,span#yellow_a52z1001{
+	top:33%!important;
+}
+/* 记实登记公示模块公示形式样式单独控制 */
+/* span#fi_a52z1004{ */
+/* 	position:absolute; */
+/* 	left:27%; */
+/* 	top: 42%; */
+/* } */
+/* 记实登记公示模块公示形式亮灯样式单独控制 */
+/* span#red_a52z1004,span#yellow_a52z1004{ */
+/*     left: 77%!important; */
+/*     top: 38%!important; */
+/* } */
+/* 记实登记公示模块受理部门亮灯样式单独控制 */
+span#red_a52z1007,span#yellow_a52z1007{
+	top: 33%!important;
+}
+/* 记实登记公示模块公示开始时间亮灯样式单独控制 */
+span#red_a52z1014,span#yellow_a52z1014{
+	left:35%!important;
+}
+/* 记实登记任职模块试用期起止时间样式单独控制 */
+.a52z1121Syq>div{
+	height:auto!important;
+}
+/* 记实登记任职模块试用期起止时间样式单独控制 */
+.syqqz-time>div{
+    height: 33px!important;
+    width: 111px!important;
+    display: inline-block;
+    vertical-align: middle;
+}
+/* 记实登记任职模块是否实行试用期制度亮灯样式单独控制 */
+span#red_a52z1114,span#yellow_a52z1114{
+	top:14%!important;
+}
+/* textarea的亮灯样式 */
+	/* 记实登记动议模块动议原因、酝酿范围、意向性人选姓名及职务亮灯样式单独控制 */
+	span#red_a52z207,span#yellow_a52z207,span#red_a52z217,span#yellow_a52z217,span#red_a52z227,span#yellow_a52z227{
+		top: 35%!important;
+	}
+	/* 记实登记初始提名模块情况摘要亮灯样式单独控制 *//* 记实登记竞争性选拔模块需要说明的情况亮灯样式单独控制 */
+	span#red_a52z321,span#yellow_a52z321,span#red_a52z524,span#yellow_a52z524{
+		top: 35%!important;
+	}
+	/* 记实登记确定考察对象模块上级党委组织部门批复情况、需要说明的情况亮灯样式单独控制 */
+	span#red_a52z651,span#yellow_a52z651,span#red_a52z677,span#yellow_a52z677{
+		top: 35%!important;
+	}
+	/* 记实登记组织考察模块需要说明的情况、调查结论(查核结果)亮灯样式单独控制 */
+	span#red_a52z751,span#yellow_a52z751,span#red_a52z761,span#yellow_a52z761{
+		top: 35%!important;
+	}
+	/* 记实登记有关事项报告模块情况摘要亮灯样式单独控制 */
+	span#red_a52z821,span#yellow_a52z821{
+		top: 35%!important;
+	}
+	/* 记实登记讨论决定模块破格或越级提拔的具体情形和理由亮灯样式单独控制 */
+	span#red_a52z924,span#yellow_a52z924{
+		top: 35%!important;
+	}
+	/* 记实登记任职模块重要情况记实亮灯样式单独控制 */
+	span#red_a52z1151,span#yellow_a52z1151{
+		top: 35%!important;
+	}
+	/* 平职交流模块其他原因、重要情况记实亮灯样式单独控制 */
+	span#red_a5241a,span#yellow_a5241a,span#red_a52z851,span#yellow_a52z851{
+		top: 30%!important;
+	}
+/* textarea的亮灯样式 */
+/*页面顶部breadcrumb颜色*/
+.breadcrumbAColor{
+	cursor: pointer;
+	text-decoration: none;
+}
+.breadcrumbAColor:hover{
+	text-decoration: none;
+}
+/*页面顶部breadcrumb颜色*/

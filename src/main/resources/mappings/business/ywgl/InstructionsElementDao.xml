@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.tfkj.business.ywgl.dao.InstructionsElementDao">
+  <resultMap id="BaseResultMap" type="com.tfkj.business.ywgl.entity.InstructionsElement">
+
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+    <result column="OFFICE_ID" jdbcType="VARCHAR" property="officeId" />
+    <result column="LEADER_ID" jdbcType="VARCHAR" property="leaderId" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+    <result column="SORT" jdbcType="VARCHAR" property="sort" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+    <result column="IN0001" jdbcType="VARCHAR" property="in0001" />
+    <result column="IN0002" jdbcType="VARCHAR" property="in0002" />
+    <result column="IN0003" jdbcType="VARCHAR" property="in0003" />
+    <result column="IN0004" jdbcType="LONGVARCHAR" property="in0004" />
+    <result column="IN0005" jdbcType="VARCHAR" property="in0005" />
+    <result column="IN0006" jdbcType="VARCHAR" property="in0006" />
+    <result column="IN0007" jdbcType="VARCHAR" property="in0007" />
+    <result column="IN0008" jdbcType="VARCHAR" property="in0008" />
+    <result column="IN0009" jdbcType="VARCHAR" property="in0009" />
+    <result column="IN0010" jdbcType="VARCHAR" property="in0010" />
+    <result column="IN0011" jdbcType="VARCHAR" property="in0011" />
+    <result column="IN0012" jdbcType="VARCHAR" property="in0012" />
+    <result column="IN0013" jdbcType="VARCHAR" property="in0013" />
+    <result column="IN0014" jdbcType="VARCHAR" property="in0014" />
+    <result column="IN0015" jdbcType="VARCHAR" property="in0015" />
+
+  </resultMap>
+  <resultMap id="satgeResultMap" type="com.tfkj.business.ywgl.entity.InstructionsElement">
+
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+    <result column="IN0001" jdbcType="VARCHAR" property="parentIn0001" />
+		<result column="IN0002" jdbcType="VARCHAR" property="parentIn0002" />
+		<result column="IN0003" jdbcType="LONGVARCHAR" property="parentIn0003" />
+		<result column="IN0004" jdbcType="TIMESTAMP" property="parentIn0004" />
+		<result column="IN0005" jdbcType="TIMESTAMP" property="parentIn0005" />
+		<result column="IN0006" jdbcType="VARCHAR" property="parentIn0006" />
+		<result column="IN0007" jdbcType="VARCHAR" property="parentIn0007" />
+		<result column="IN0008" jdbcType="VARCHAR" property="parentIn0008" />
+		<result column="IN0009" jdbcType="LONGVARCHAR" property="parentIn0009" />
+		<result column="IN0010" jdbcType="LONGVARCHAR" property="parentIn0010" />
+
+		<result column="IN0016" jdbcType="VARCHAR" property="parentIn0016" />
+		<result column="IN0017" jdbcType="VARCHAR" property="parentIn0017" />
+		<result column="IN0018" jdbcType="VARCHAR" property="parentIn0018" />
+		<result column="IN0019" jdbcType="VARCHAR" property="parentIn0019" />
+		<result column="in0020Text" jdbcType="VARCHAR" property="parentIn0020Text" />
+		<result column="in0020Id" jdbcType="VARCHAR" property="parentIn0020Id" />
+		<result column="officeName" jdbcType="LONGVARCHAR" property="parentIn0009Text" />
+		<result column="leaderName" jdbcType="LONGVARCHAR" property="parentIn0010Text" />
+
+        <result column="OIN0001" jdbcType="VARCHAR" property="parentIn0011" />
+        <result column="OIN0002" jdbcType="VARCHAR" property="parentIn0012" />
+        <result column="OIN0003" jdbcType="VARCHAR" property="parentIn0013" />
+        <result column="OIN0004" jdbcType="LONGVARCHAR" property="parentIn0014" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+
+    ID, DATA_ID, OFFICE_ID, LEADER_ID, TYPE, FILE_PATH, SORT, CREATE_BY, CREATE_DATE,
+    UPDATE_BY, UPDATE_DATE, REMARKS, DEL_FLAG, IN0001, IN0002, IN0003,IN0004, IN0005, IN0006,
+    IN0007, IN0008, IN0009, IN0010, IN0011, IN0012, IN0013, IN0014, IN0015
+  </sql>
+  <sql id="Instructions_Column_List">
+	a.ID as DATA_ID,
+	a. IN0001,a. IN0002,a.IN0003,a.IN0004,a. IN0005,a. IN0006,a. IN0007,a. IN0008,
+	a.IN0009,a. IN0010,a.IN0011,a. IN0012,a.IN0013,a. IN0014,a. IN0016,a. IN0017,a. IN0018,a. IN0019
+	</sql>
+	<sql id="InstructionsElement_office_List">
+	o.ID AS OID,o.DATA_ID AS ODATA_ID,o.OFFICE_ID AS OOFFICE_ID,o.LEADER_ID AS OLEADER_ID,o.TYPE AS OTYPE,
+	o.TYPE type,o.ID AS id,
+	o.FILE_PATH AS OFILE_PATH,o.SORT AS OSORT,o.CREATE_BY AS OCREATE_BY,o.CREATE_DATE AS OCREATE_DATE,
+	o.UPDATE_BY AS OUPDATE_BY,o.UPDATE_DATE AS OUPDATE_DATE,o.REMARKS AS OREMARKS,o.DEL_FLAG AS ODEL_FLAG,
+	o.IN0001 AS OIN0001,o.IN0002 AS OIN0002,o.IN0003 AS OIN0003,o.IN0004 AS OIN0004,o.IN0005 AS OIN0005,
+	o.IN0006 AS OIN0006,o.IN0007 AS OIN0007,o.IN0008 AS OIN0008,o.IN0009 AS OIN0009,o.IN0010 AS OIN0010,
+	o.IN0011 AS OIN0011,o.IN0012 AS OIN0012,o.IN0013 AS OIN0013,o.IN0014 AS OIN0014,o.IN0015 AS OIN0015
+	</sql>
+	<sql id="InstructionsElement_leader_List">
+	l.ID AS LID,l.DATA_ID AS LDATA_ID,l.OFFICE_ID AS LOFFICE_ID,l.LEADER_ID AS LLEADER_ID,l.TYPE AS LTYPE,
+	l.FILE_PATH AS LFILE_PATH,l.SORT AS LSORT,l.CREATE_BY AS LCREATE_BY,l.CREATE_DATE AS LCREATE_DATE,
+	l.UPDATE_BY AS LUPDATE_BY,l.UPDATE_DATE AS LUPDATE_DATE,l.REMARKS AS LREMARKS,l.DEL_FLAG AS LDEL_FLAG,
+	l.IN0001 AS LIN0001,l.IN0002 AS LIN0002,l.IN0003 AS LIN0003,l.IN0004 AS LIN0004,l.IN0005 AS LIN0005,
+	l.IN0006 AS LIN0006,l.IN0007 AS LIN0007,l.IN0008 AS LIN0008,l.IN0009 AS LIN0009,l.IN0010 AS LIN0010,
+	l.IN0011 AS LIN0011,l.IN0012 AS LIN0012,l.IN0013 AS LIN0013,l.IN0014 AS LIN0014,l.IN0015 AS LIN0015
+	</sql>
+  <select id="get"  resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from ywgl_instructions_element
+    where ID = #{id,jdbcType=VARCHAR}
+    and DEL_FLAG = '0'
+  </select>
+  <select id="findOneElement" parameterType="com.tfkj.business.ywgl.entity.InstructionsElement"   resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from ywgl_instructions_element
+    where DEL_FLAG = '0' AND  DATA_ID = #{dataId}
+    <if test="officeId!=null">
+      AND OFFICE_ID = #{officeId}
+    </if>
+    <if test="leaderId!=null">
+      AND LEADER_ID = #{leaderId}
+    </if>
+    LIMIT 0,1
+  </select>
+  <select id="findList"  resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from ywgl_instructions_element
+    where DEL_FLAG = '0'
+    <if test="dataId !=null and dataId!=''">
+      AND  DATA_ID = #{dataId}
+    </if>
+  </select>
+  <select id="findPageList" resultMap="satgeResultMap">
+		SELECT
+		<include refid="Instructions_Column_List" />
+		,
+		<include refid="InstructionsElement_office_List" />
+		,
+		s.NUMBER as in0020Text,
+		s.id as in0020Id,
+		IFNULL(office.NAME,'') as
+		officeName,
+		IFNULL(leader.l001,'') as leaderName
+		FROM
+		ywgl_instructions a
+		LEFT JOIN
+		ywgl_instructions_element o ON a.id = o.DATA_ID AND
+		o.DEL_FLAG ='0'
+		LEFT JOIN
+		special_report s ON s.id = a.in0020 AND s.DEL_FLAG ='0'
+		LEFT JOIN sys_office office on office.ID = o.OFFICE_ID AND o.TYPE ='2'
+		LEFT JOIN sys_leader leader on leader.ID = o.LEADER_ID AND o.TYPE ='1'
+		WHERE
+		a.DEL_FLAG = '0' and a.id in (${dataId})
+        <if test="parentIn0012!=null and parentIn0012!=''">
+          AND  o.IN0002 = #{parentIn0012}
+        </if>
+    <!-- 文件名 -->
+    <if test="in0001 != null and in0001 != ''">
+      AND a.in0001 LIKE CONCAT('%', #{in0001},'%')
+    </if>
+    <!-- 批示时间 -->
+    <if test="parentIn0004Start != null and parentIn0004Start != '' ">
+      <![CDATA[
+    			AND   a.in0004 >= #{parentIn0004Start,jdbcType=TIMESTAMP}
+    ]]>
+    </if>
+    <if test="parentIn0004End != null and parentIn0004End != '' ">
+      <![CDATA[
+     			AND   a.in0004 <= #{parentIn0004End,jdbcType=TIMESTAMP}
+     ]]>
+    </if>
+    <!-- 文件号 -->
+    <if test="in0002 != null and in0002 != ''">
+      AND a.in0002 LIKE CONCAT('%', #{in0002},'%')
+    </if>
+    <!-- 收件时间 -->
+    <if test="parentIn0005Start != null and parentIn0005Start != '' ">
+      <![CDATA[
+    			AND   a.in0005 >= #{parentIn0005Start,jdbcType=TIMESTAMP}
+    ]]>
+    </if>
+    <if test="parentIn0005End != null and parentIn0005End != '' ">
+      <![CDATA[
+     			AND   a.in0005 <= #{parentIn0005End,jdbcType=TIMESTAMP}
+     ]]>
+    </if>
+
+    <!-- 按轻重分类 -->
+    <if test=" in0006 != null and in0006 != ''">
+      AND a.in0006 LIKE CONCAT('%', #{in0006},'%')
+    </if>
+    <!-- 按要求分类 -->
+    <if test=" in0007 != null and in0007 != ''">
+      AND a.in0007 LIKE CONCAT('%', #{in0007},'%')
+    </if>
+    <!-- 按内容分类 -->
+    <if test=" in0008 != null and in0008 != ''">
+      AND a.in0008 LIKE CONCAT('%', #{in0008},'%')
+    </if>
+    <!-- 按内容下备注 -->
+    <if test=" parentIn0018 != null and parentIn0018 != ''">
+      AND a.in0018 LIKE CONCAT('%', #{parentIn0018},'%')
+    </if>
+
+    <!-- 责任领导 -->
+    <if test="leaderIds != null and leaderIds != ''">
+      AND o.LEADER_ID = #{leaderIds}
+    </if>
+    <!-- 承办单位 -->
+    <if test="officeIds != null and officeIds != ''">
+      AND  o.OFFICE_ID = #{officeIds}
+    </if>
+    <!-- 文件类型 -->
+    <if test=" parentIn0016 != null and parentIn0016 != ''">
+      AND a.in0016 LIKE CONCAT('%', #{parentIn0016},'%')
+    </if>
+
+    <!-- 年度 -->
+    <if test="taskYear != null  and taskYear != ''">
+      AND year(a.in0004) = #{taskYear}
+    </if>
+
+    <!-- 落实及上报情况 -->
+    <if test="in0014 != null  and in0014 != ''">
+      AND (o.IN0004 LIKE CONCAT('%', #{in0014},'%'))
+    </if>
+    <!-- 标记 -->
+    <if test="parentIn0019 != null  and parentIn0019 != ''">
+      AND find_in_set(#{parentIn0019},a.in0019)
+    </if>
+    <!-- 来源 -->
+    <if test="parentIn0017 != null  and parentIn0017 != ''">
+      AND a.in0017 = #{parentIn0017}
+    </if>
+
+    <!-- 是否超期 -->
+    <if test=" in0003 != null and in0003 != ''">
+      AND (
+      o.in0003 LIKE CONCAT('%', #{in0003},'%')
+      )
+    </if>
+    <!-- 办理情况 -->
+    <if test=" in0002 != null and in0002 != ''">
+      AND (
+      o.in0002 LIKE CONCAT('%', #{in0002},'%')
+      )
+    </if>
+		ORDER BY a.in0005,a.Id,o.SORT
+	</select>
+  <insert id="insert" >
+
+    insert into ywgl_instructions_element
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="dataId != null">
+        DATA_ID,
+      </if>
+      <if test="officeId != null">
+        OFFICE_ID,
+      </if>
+      <if test="leaderId != null">
+        LEADER_ID,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="filePath != null">
+        FILE_PATH,
+      </if>
+      <if test="sort != null">
+        SORT,
+      </if>
+      <if test="createBy != null and createBy.id != null and createBy.id != ''">
+        CREATE_BY,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+        UPDATE_BY,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
+      <if test="in0001 != null">
+        IN0001,
+      </if>
+      <if test="in0002 != null">
+        IN0002,
+      </if>
+      <if test="in0003 != null">
+        IN0003,
+      </if>
+      <if test="in0005 != null">
+        IN0005,
+      </if>
+      <if test="in0006 != null">
+        IN0006,
+      </if>
+      <if test="in0007 != null">
+        IN0007,
+      </if>
+      <if test="in0008 != null">
+        IN0008,
+      </if>
+      <if test="in0009 != null">
+        IN0009,
+      </if>
+      <if test="in0010 != null">
+        IN0010,
+      </if>
+      <if test="in0011 != null">
+        IN0011,
+      </if>
+      <if test="in0012 != null">
+        IN0012,
+      </if>
+      <if test="in0013 != null">
+        IN0013,
+      </if>
+      <if test="in0014 != null">
+        IN0014,
+      </if>
+      <if test="in0015 != null">
+        IN0015,
+      </if>
+      <if test="in0004 != null">
+        IN0004,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dataId != null">
+        #{dataId,jdbcType=VARCHAR},
+      </if>
+      <if test="officeId != null">
+        #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="leaderId != null">
+        #{leaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null and createBy.id != null and createBy.id != ''">
+        #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+        #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="in0001 != null">
+        #{in0001,jdbcType=VARCHAR},
+      </if>
+      <if test="in0002 != null">
+        #{in0002,jdbcType=VARCHAR},
+      </if>
+      <if test="in0003 != null">
+        #{in0003,jdbcType=VARCHAR},
+      </if>
+      <if test="in0005 != null">
+        #{in0005,jdbcType=VARCHAR},
+      </if>
+      <if test="in0006 != null">
+        #{in0006,jdbcType=VARCHAR},
+      </if>
+      <if test="in0007 != null">
+        #{in0007,jdbcType=VARCHAR},
+      </if>
+      <if test="in0008 != null">
+        #{in0008,jdbcType=VARCHAR},
+      </if>
+      <if test="in0009 != null">
+        #{in0009,jdbcType=VARCHAR},
+      </if>
+      <if test="in0010 != null">
+        #{in0010,jdbcType=VARCHAR},
+      </if>
+      <if test="in0011 != null">
+        #{in0011,jdbcType=VARCHAR},
+      </if>
+      <if test="in0012 != null">
+        #{in0012,jdbcType=VARCHAR},
+      </if>
+      <if test="in0013 != null">
+        #{in0013,jdbcType=VARCHAR},
+      </if>
+      <if test="in0014 != null">
+        #{in0014,jdbcType=VARCHAR},
+      </if>
+      <if test="in0015 != null">
+        #{in0015,jdbcType=VARCHAR},
+      </if>
+      <if test="in0004 != null">
+        #{in0004,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateElement"  parameterType="com.tfkj.business.ywgl.entity.InstructionsElement">
+
+    update ywgl_instructions_element
+    <trim prefix="set"  suffixOverrides=",">
+
+      <if test="in0001 != null">
+        IN0001 = #{in0001},
+      </if>
+      <if test="in0003 != null">
+        IN0003 = #{in0003},
+      </if>
+      <if test="in0002 != null">
+        IN0002 = #{in0002},
+      </if>
+      <if test="in0004 != null">
+        IN0004 = #{in0004},
+      </if>
+    </trim>
+    where ID = #{id}
+  </update>
+  <update id="update" >
+
+    update ywgl_instructions_element
+    <set>
+      <if test="dataId != null">
+        DATA_ID = #{dataId,jdbcType=VARCHAR},
+      </if>
+      <if test="officeId != null">
+        OFFICE_ID = #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="leaderId != null">
+        LEADER_ID = #{leaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        SORT = #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null and createBy.id != null and createBy.id != ''">
+        CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+        UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="in0001 != null">
+        IN0001 = #{in0001,jdbcType=VARCHAR},
+      </if>
+      <if test="in0002 != null">
+        IN0002 = #{in0002,jdbcType=VARCHAR},
+      </if>
+      <if test="in0003 != null">
+        IN0003 = #{in0003,jdbcType=VARCHAR},
+      </if>
+      <if test="in0005 != null">
+        IN0005 = #{in0005,jdbcType=VARCHAR},
+      </if>
+      <if test="in0006 != null">
+        IN0006 = #{in0006,jdbcType=VARCHAR},
+      </if>
+      <if test="in0007 != null">
+        IN0007 = #{in0007,jdbcType=VARCHAR},
+      </if>
+      <if test="in0008 != null">
+        IN0008 = #{in0008,jdbcType=VARCHAR},
+      </if>
+      <if test="in0009 != null">
+        IN0009 = #{in0009,jdbcType=VARCHAR},
+      </if>
+      <if test="in0010 != null">
+        IN0010 = #{in0010,jdbcType=VARCHAR},
+      </if>
+      <if test="in0011 != null">
+        IN0011 = #{in0011,jdbcType=VARCHAR},
+      </if>
+      <if test="in0012 != null">
+        IN0012 = #{in0012,jdbcType=VARCHAR},
+      </if>
+      <if test="in0013 != null">
+        IN0013 = #{in0013,jdbcType=VARCHAR},
+      </if>
+      <if test="in0014 != null">
+        IN0014 = #{in0014,jdbcType=VARCHAR},
+      </if>
+      <if test="in0015 != null">
+        IN0015 = #{in0015,jdbcType=VARCHAR},
+      </if>
+      <if test="in0004 != null">
+        IN0004 = #{in0004,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateElementOfficeLeader"  parameterType="com.tfkj.business.ywgl.entity.InstructionsElement" >
+
+    update ywgl_instructions_element
+    <set>
+
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        SORT = #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null and createBy.id != null and createBy.id != ''">
+        CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+        UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="in0001 != null">
+        IN0001 = #{in0001,jdbcType=VARCHAR},
+      </if>
+      <if test="in0002 != null">
+        IN0002 = #{in0002,jdbcType=VARCHAR},
+      </if>
+      <if test="in0003 != null">
+        IN0003 = #{in0003,jdbcType=VARCHAR},
+      </if>
+      <if test="in0005 != null">
+        IN0005 = #{in0005,jdbcType=VARCHAR},
+      </if>
+      <if test="in0006 != null">
+        IN0006 = #{in0006,jdbcType=VARCHAR},
+      </if>
+      <if test="in0007 != null">
+        IN0007 = #{in0007,jdbcType=VARCHAR},
+      </if>
+      <if test="in0008 != null">
+        IN0008 = #{in0008,jdbcType=VARCHAR},
+      </if>
+      <if test="in0009 != null">
+        IN0009 = #{in0009,jdbcType=VARCHAR},
+      </if>
+      <if test="in0010 != null">
+        IN0010 = #{in0010,jdbcType=VARCHAR},
+      </if>
+      <if test="in0011 != null">
+        IN0011 = #{in0011,jdbcType=VARCHAR},
+      </if>
+      <if test="in0012 != null">
+        IN0012 = #{in0012,jdbcType=VARCHAR},
+      </if>
+      <if test="in0013 != null">
+        IN0013 = #{in0013,jdbcType=VARCHAR},
+      </if>
+      <if test="in0014 != null">
+        IN0014 = #{in0014,jdbcType=VARCHAR},
+      </if>
+      <if test="in0015 != null">
+        IN0015 = #{in0015,jdbcType=VARCHAR},
+      </if>
+      <if test="in0004 != null">
+        IN0004 = #{in0004,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where
+      DATA_ID = #{dataId}
+
+    <if test="officeId != null">
+     AND OFFICE_ID = #{officeId}
+    </if>
+    <if test="leaderId != null">
+     AND LEADER_ID = #{leaderId}
+    </if>
+  </update>
+  <update id="delete" >
+
+    update ywgl_instructions_element
+    <set>
+      <if test="createBy != null and createBy.id != null and createBy.id != ''">
+        CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+        UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      del_flag = #{DEL_FLAG_DELETE}
+
+    </set>
+    where DATA_ID = #{dataId,jdbcType=VARCHAR}
+  </update>
+</mapper>

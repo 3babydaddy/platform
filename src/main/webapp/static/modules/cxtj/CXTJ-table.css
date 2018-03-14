@@ -1,0 +1,326 @@
+/*公共样式*/
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	font-family: "微软雅黑";
+	font-size: 15px;
+	color:#333;
+}
+ul{
+	margin: 0;
+	padding: 0;
+}
+ul li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+h1{
+	margin: 0;
+}
+p{
+	margin: 0;
+}
+form{
+	margin-bottom:0;
+}
+input{
+	padding: 0;
+}
+.dwsc-wrap,.tjcx-wrap{
+	/*width: 1268px;*/
+	width: auto;
+	margin: 0 auto;
+	padding-left: 12px;
+	padding-top: 2px;
+}
+.cxtj-search{
+	width: 66px;
+	height: 24px;
+	line-height: 24px;
+/* 	vertical-align: middle; */
+	color: #fff;
+	border:none;
+	background-color: #f44336;
+	font-size: 15px;
+	font-family: "微软雅黑";
+	cursor: pointer;
+	margin-left: 10px;
+	padding: 0;
+}
+.cxtj-tool{
+	height: 65px;
+	vertical-align: middle;
+	line-height: 65px;
+}
+.cxtj-tool label,.cbtj-tool label{
+	color: #f54437;
+	font-size: 15px;
+	/*vertical-align: middle;*/
+}
+.cxtj-tool select,.cbtj-tool select{
+	height: 26px;
+	font-size: 14px;
+	border:1px solid #c5c9d0;
+}
+.dwsc-table th,.ybg-table th{
+	text-align: center;
+	vertical-align: middle;
+	height: 39px;
+	background-color: #ffebee;
+	border:1px solid #b5b8bd;
+	font-size: 15px;
+}
+.dwsc-table td,.ybg-table td{
+	text-align: center;
+	vertical-align: middle;
+	border:1px solid #b5b8bd;
+	height: 29px;
+	font-size: 14px;
+}
+.dwsc-tabledw{/*表格中的填报单位,月报告等其他页面也用了此样式,其作用是内容左对齐，超出文字用省略号显示*/
+	text-align: left!important;
+	text-indent: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+/*公共样式*/
+/*单位审查样式*/
+.dwsc-tit{
+	width: 1023px;
+	height: 74px;
+	border-bottom: 1px solid #b5b9bd;
+	text-align: center;
+	line-height: 75px;
+	color: #f54437;
+	font-size: 28px;
+ 	font-family: "微软雅黑";
+ 	font-weight: bold;
+}
+.dwsc-tbdw{/*填报单位*/
+	width: 130px;
+	height: 26px;
+	margin-left: 5px;
+	margin-right: 5px;
+	border: 1px solid #c5c9d0;
+	line-height: 26px;
+	text-indent: 10px;
+	/*background-color: #e9ecf1;*/
+	font-size: 14px;
+}
+.dwsc-tljdsj-start,.dwsc-tljdsj-end{/*讨论决定时间*/
+	height: 26px;
+	width: 110px;
+	border: 1px solid #c5c9d0;
+	line-height: 26px;
+	/*background-color: #e9ecf1;*/
+	margin: 0 5px;
+	text-align: left;
+	text-indent: 10px;
+	font-size: 14px;
+}
+.dwsc-table{
+	table-layout: fixed;
+	border-collapse: collapse;
+	border: 1px solid #b5b8bd;
+	width: 1024px;
+}
+.dwsc-table tr:hover td{/* 鼠标滑过列表时本行变色 */
+	background-color: #b1dfec;
+}
+.dwsc-table td a{
+	color: #333;
+}
+.dwsc-table th a{
+	color:#333;
+}
+.dwsc-table th a:visited{
+	color:#333;
+}
+/*单位审查样式*/
+/*条件查询样式*/
+.tjcx-tab-top{
+	font-size: 15px;
+	font-family: "微软雅黑";
+	height: 39px;
+	width: 1023px;
+	border-bottom: 1px solid #b5b8bd;
+}
+.tjcx-tab-top li{
+	float: left;
+	height: 39px;
+	width: 75px;
+	line-height: 39px;
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	color: #f44336;
+}
+.current{
+	border-top: 1px solid #dfdfdf;
+	border-left: 1px solid #dfdfdf;
+	border-right: 1px solid #dfdfdf;
+}
+.tjcx-tab-top li.current a{
+	color:#333;
+}
+.tjcx-tab-content div{
+/* 	display: none; */
+}
+.cxtj-tool-tit{
+	color: #f44336;
+	line-height: 26px;
+	vertical-align: middle;
+	margin-left: 2px;
+	margin-right: 10px;
+}
+.TJCX-table{
+	border-collapse: collapse;
+	text-align: center;
+	border-color: #333;
+	table-layout: fixed;
+	width:720px;
+}
+.TJCX-table td{
+	border: 1px solid #b5b8bd;
+	height: 34px;
+/* 	padding: 0 5px; */
+	font-size: 14px;
+}
+.biaotouzt{/*表头字体 */
+	font-weight: bold;
+	background-color: #f4f5f7;
+}
+.neirongbg select{
+	height: 100%;
+	line-height: 26px;
+	width: 100%;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	text-align: left;
+	text-overflow: ellipsis;
+	border: none;
+	padding: 6px 0\9;
+/* 	background-color: #f4f5f7; */
+}
+/* .neirongbg select option{ */
+/* 	width:auto!important; */
+/* } */
+.neirongbg input[type="text"]{
+/* 	background-color: #f4f5f7; */
+	height: 100%;
+	line-height: 34px;
+	text-align: left;
+	text-indent: 3px;
+	width: 100%;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	text-overflow: ellipsis;
+	border: none;
+}
+.checkboxes div{
+	width: 150px;
+	text-align:left;
+	vertical-align:middle;
+	display:inline-block;
+}
+.questionslx div{/*问题类型的复选框*/
+	width: 250px;
+	text-align: left;
+	vertical-align:middle;
+	display: inline-block;
+}
+.hanxunque div{/*函询针对问题的复选框*/
+	width: 170px;
+	text-align:left;
+	vertical-align:middle;
+	display: inline-block;
+}
+.jiemianque div{/*诫勉针对问题的复选框*/
+	width: 509px;
+	text-align:left;
+	vertical-align:middle;
+	display: inline-block;
+}
+/*复选框下label的样式开始*/
+.checkboxes div label,.questionslx div label,.jiemianque div label,.hanxunque div label{
+	font-family: "微软雅黑";
+	display: inline-block;
+    margin-bottom: 0;
+    font-size: 12px;
+    _font-size: 12px;
+    font-weight: normal;
+    line-height: 20px;
+    vertical-align: middle;
+}
+.checkboxes div input,.questionslx div input,.jiemianque div input,.hanxunque div input{
+	vertical-align: middle;
+}
+/*复选框下label的样式结束*/
+.neirongbg input:focus,.neirongbg select:focus{
+	outline: none\9;
+}
+.dateInput{
+	width: 43%!important;
+	font-size: 13px!important;
+	text-indent: 0px!important;
+}
+.neirongbg textarea{
+	min-width: 493px;
+	min-height: 100px;
+	font-size: 15px;
+	margin-top: 7px;
+}
+/*条件查询样式*/
+/*月报告查询样式*/
+.ybg-yf{/*月报告月份*/
+	height: 26px;
+	width: 100px;
+	margin-left: 5px;
+	margin-right: 5px;
+	border: 1px solid #c5c9d0;
+	line-height: 26px;
+	text-indent: 10px;
+	font-size: 14px;
+}
+.ybg-table{/*单独起类名就没有鼠标滑过的效果*/
+	table-layout: fixed;
+	border-collapse: collapse;
+	border: 1px solid #b5b8bd;
+	width: 960px;
+}
+/*月报告查询样式*/
+/*迟报统计样式*/
+.cbtj-tool{
+	height: auto;
+	vertical-align: middle;
+	line-height: 46px;
+}
+.cbtj-tabledw{/*table下的的单位即是表格中的单位，使超出长度的文字以省略号显示*/
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align:left;
+}
+/*迟报统计样式*/
+/*网络巡查样式*/
+.wlxc-cctj{
+	padding: 20px 0 20px 5px;
+	text-align: left!important;
+}
+/*网络巡查样式*/
+/*违规审查样式*/
+.tjcx-tab-top li a{
+	color: #f44336;
+	height: 39px;
+	width: 75px;
+	line-height: 39px;
+	vertical-align: middle;
+	text-align: center;
+	display:inline-block;
+}
+/*违规审查样式*/

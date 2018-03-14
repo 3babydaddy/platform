@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.framework.system.dao.HolidayDao">
+    
+	<sql id="holidayColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.year AS "year",
+		a.begin_date AS "beginDate",
+		a.end_date AS "endDate",
+		a.exchange_date1 AS "exchangeDate1",
+		a.exchange_date2 AS "exchangeDate2",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="holidayJoins">
+	</sql>
+    
+	<select id="get" resultType="Holiday">
+		SELECT 
+			<include refid="holidayColumns"/>
+		FROM sys_holiday a
+		<include refid="holidayJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Holiday">
+		SELECT 
+			<include refid="holidayColumns"/>
+		FROM sys_holiday a
+		<include refid="holidayJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name = #{name}
+			</if>
+			<if test="year != null and year != ''">
+				AND a.year = #{year}
+			</if>
+		</where>
+		ORDER BY a.year,a.begin_date 
+	</select>
+	
+	<select id="findAllList" resultType="Holiday">
+		SELECT 
+			<include refid="holidayColumns"/>
+		FROM sys_holiday a
+		<include refid="holidayJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+	</select>
+	
+	<select id="isExchangeDayList" resultType="Holiday">
+		SELECT 
+			<include refid="holidayColumns"/>
+		FROM sys_holiday a
+		<where>
+		(date_format(EXCHANGE_DATE1, '%Y-%m-%d') = #{day} OR date_format(EXCHANGE_DATE2, '%Y-%m-%d') = #{day})
+		AND a.del_flag = '0'
+		</where>		
+	</select>
+
+	<select id="isHolidayList" resultType="Holiday">
+		SELECT 
+			<include refid="holidayColumns"/>
+		FROM sys_holiday a
+		<where>
+		<![CDATA[
+        date_format(BEGIN_DATE, '%Y-%m-%d') <= #{day} AND date_format(END_DATE, '%Y-%m-%d') >= #{day} AND a.del_flag = '0'
+        ]]>
+		</where>		
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_holiday(
+			id,
+			name,
+			year,
+			begin_date,
+			end_date,
+			exchange_date1,
+			exchange_date2,
+			create_by,
+			create_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{name},
+			#{year},
+			#{beginDate},
+			#{endDate},
+			#{exchangeDate1},
+			#{exchangeDate2},
+			#{createBy.id},
+			#{createDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_holiday SET 	
+			name = #{name},
+			year = #{year},
+			begin_date = #{beginDate},
+			end_date = #{endDate},
+			exchange_date1 = #{exchangeDate1},
+			exchange_date2 = #{exchangeDate2},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sys_holiday SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

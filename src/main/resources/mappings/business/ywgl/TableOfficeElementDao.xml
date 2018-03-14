@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.business.ywgl.dao.TableOfficeElementDao">
+
+  <sql id="Base_Column_List">
+     ID, DATA_ID, OFFICE_ID, OFFICE_NAME, CHARGE_PERSON, FILE_PATH, SORT, CREATE_BY, CREATE_DATE,
+    UPDATE_BY, UPDATE_DATE, REMARKS, DEL_FLAG, A0001, A0002, A0003, A0004, A0005
+  </sql>
+  <select id="get" resultType="TableOfficeElement">
+
+    select
+    <include refid="Base_Column_List" />
+    from ywgl_table_office_element
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+ <select id="getByDataIdAndFieldType" resultType="TableOfficeElement">
+
+    select
+    <include refid="Base_Column_List" />
+    from ywgl_table_office_element
+    where DATA_ID = #{dataId,jdbcType=VARCHAR}
+    and A0001=#{fieldType,jdbcType=VARCHAR}
+  </select>
+ <select id="findList" resultType="TableOfficeElement">
+    select
+    <include refid="Base_Column_List" />
+    from ywgl_table_office_element
+    where DEL_FLAG = '0'
+  </select>
+
+  <insert id="insert" >
+
+    insert into ywgl_table_office_element
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="dataId != null">
+        DATA_ID,
+      </if>
+      <if test="office != null and office.id != null and office.id != ''">
+        OFFICE_ID,
+      </if>
+      <if test="office != null and office.name != null and office.name != ''">
+        OFFICE_NAME,
+      </if>
+      <if test="chargePerson != null">
+        CHARGE_PERSON,
+      </if>
+      <if test="filePath != null">
+        FILE_PATH,
+      </if>
+      <if test="sort != null">
+        SORT,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
+      <if test="a0001 != null">
+        A0001,
+      </if>
+      <if test="a0002 != null">
+        A0002,
+      </if>
+      <if test="a0003 != null">
+        A0003,
+      </if>
+      <if test="a0004 != null">
+        A0004,
+      </if>
+      <if test="a0005 != null">
+        A0005,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dataId != null">
+        #{dataId,jdbcType=VARCHAR},
+      </if>
+      <if test="office != null and office.id != null and office.id != ''">
+        #{office.id,jdbcType=VARCHAR},
+      </if>
+      <if test="office != null and office.name != null and office.name != ''">
+        #{office.name,jdbcType=VARCHAR},
+      </if>
+      <if test="chargePerson != null">
+        #{chargePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+       <if test="a0001 != null">
+        #{a0001,jdbcType=VARCHAR},
+      </if>
+      <if test="a0002 != null">
+        #{a0002,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a0003 != null">
+        #{a0003,jdbcType=VARCHAR},
+      </if>
+      <if test="a0004 != null">
+        #{a0004,jdbcType=VARCHAR},
+      </if>
+      <if test="a0005 != null">
+        #{a0005,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="deleteByDataId" parameterType="java.lang.String">
+    delete from ywgl_table_office_element
+    where  DATA_ID = #{dataId,jdbcType=VARCHAR}
+  </delete>
+<delete id="deleteByFieldType" parameterType="java.lang.String">
+    delete from ywgl_table_office_element
+    where  A0001 = #{fieldType,jdbcType=VARCHAR}
+  </delete>
+  <update id="update" >
+
+    update ywgl_table_office_element
+    <set>
+      <if test="dataId != null">
+        DATA_ID = #{dataId,jdbcType=VARCHAR},
+      </if>
+      <if test="office != null and office.id != null and office.id != ''">
+        OFFICE_ID = #{office.id,jdbcType=VARCHAR},
+      </if>
+     <if test="office != null and office.name != null and office.name != ''">
+        OFFICE_NAME = #{office.name,jdbcType=VARCHAR},
+      </if>
+      <if test="chargePerson != null">
+        CHARGE_PERSON = #{chargePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        SORT = #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="a0001 != null">
+        A0001 = #{a0001,jdbcType=VARCHAR},
+      </if>
+      <if test="a0002 != null">
+        A0002 = #{a0002,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a0003 != null">
+        A0003 = #{a0003,jdbcType=VARCHAR},
+      </if>
+      <if test="a0004 != null">
+        A0004 = #{a0004,jdbcType=VARCHAR},
+      </if>
+      <if test="a0005 != null">
+        A0005 = #{a0005,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

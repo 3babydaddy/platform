@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.framework.system.dao.LeaderDao">
+
+	<sql id="Base_Column_List">
+
+		ID, l001, l002, l003, l004, l005, l006, l007, l008, l009, SORT,
+		CREATE_BY, CREATE_DATE,
+		UPDATE_BY AS "updateBy.id", UPDATE_DATE, REMARKS, DEL_FLAG, PARENT_ID AS
+		"parent.id", PARENT_IDS
+	</sql>
+	<sql id="LeaderColumns">
+
+		a.ID,a.l001,a.l002,a.l003,a.l004,a.l005,a.l006,a.l007,a.l008,a.l009,a.SORT,a.CREATE_BY,a.CREATE_DATE,a.
+		UPDATE_BY,a.UPDATE_DATE,a.REMARKS,a.DEL_FLAG,a.PARENT_ID,a.PARENT_IDS
+	</sql>
+	<select id="get" resultType="Leader">
+
+		select
+		<include refid="LeaderColumns" />
+		,
+		p.l001 AS "parent.l001"
+		from sys_leader a
+		LEFT JOIN sys_leader p ON p.id = a.parent_id
+		where a.ID = #{id,jdbcType=VARCHAR}
+		and a.DEL_FLAG='0'
+	</select>
+	<select id="findList" resultType="Leader">
+
+		select
+		<include refid="Base_Column_List" />
+		from sys_leader
+		where DEL_FLAG='0'
+		and (CHANGE_REASON != '1' or CHANGE_REASON is null)
+		<if test="l001 != null and l001!= ''">
+			AND l001 LIKE CONCAT('%', #{l001}, '%')
+		</if>
+		<if test="l004 != null and l004!= ''">
+			AND FIND_IN_SET(#{l004},l004)
+		</if>
+		<if test="parent != null and parent.id != null and parent.id != ''">
+			and PARENT_ID= #{parentId,jdbcType=VARCHAR}
+		</if>
+		ORDER BY sort
+	</select>
+
+	<insert id="insert">
+		insert into sys_leader
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="l001 != null">
+				l001,
+			</if>
+			<if test="l002 != null">
+				l002,
+			</if>
+			<if test="l003 != null">
+				l003,
+			</if>
+			<if test="l004 != null">
+				l004,
+			</if>
+			<if test="l005 != null">
+				l005,
+			</if>
+			<if test="l006 != null">
+				l006,
+			</if>
+			<if test="l007 != null">
+				l007,
+			</if>
+			<if test="l008 != null">
+				l008,
+			</if>
+			<if test="l009 != null">
+				l009,
+			</if>
+			<if test="sort != null">
+				SORT,
+			</if>
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				CREATE_BY,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				UPDATE_BY,
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE,
+			</if>
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG,
+			</if>
+			<if test="parent != null and parent.id != null and parent.id != ''">
+				PARENT_ID,
+			</if>
+			<if test="parentIds != null">
+				PARENT_IDS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="l001 != null">
+				#{l001,jdbcType=VARCHAR},
+			</if>
+			<if test="l002 != null">
+				#{l002,jdbcType=VARCHAR},
+			</if>
+			<if test="l003 != null">
+				#{l003,jdbcType=VARCHAR},
+			</if>
+			<if test="l004 != null">
+				#{l004,jdbcType=VARCHAR},
+			</if>
+			<if test="l005 != null">
+				#{l005,jdbcType=VARCHAR},
+			</if>
+			<if test="l006 != null">
+				#{l006,jdbcType=VARCHAR},
+			</if>
+			<if test="l007 != null">
+				#{l007,jdbcType=VARCHAR},
+			</if>
+			<if test="l008 != null">
+				#{l008,jdbcType=VARCHAR},
+			</if>
+			<if test="l009 != null">
+				#{l009,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				#{sort,jdbcType=INTEGER},
+			</if>
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				#{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				#{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="parent != null and parent.id != null and parent.id != ''">
+				#{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="parentIds != null">
+				#{parentIds,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update">
+		update sys_leader
+		<set>
+			<if test="l001 != null">
+				l001 = #{l001,jdbcType=VARCHAR},
+			</if>
+			<if test="l002 != null">
+				l002 = #{l002,jdbcType=VARCHAR},
+			</if>
+			<if test="l003 != null">
+				l003 = #{l003,jdbcType=VARCHAR},
+			</if>
+			<if test="l004 != null">
+				l004 = #{l004,jdbcType=VARCHAR},
+			</if>
+			<if test="l005 != null">
+				l005 = #{l005,jdbcType=VARCHAR},
+			</if>
+			<if test="l006 != null">
+				l006 = #{l006,jdbcType=VARCHAR},
+			</if>
+			<if test="l007 != null">
+				l007 = #{l007,jdbcType=VARCHAR},
+			</if>
+			<if test="l008 != null">
+				l008 = #{l008,jdbcType=VARCHAR},
+			</if>
+			<if test="l009 != null">
+				l009 = #{l009,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				SORT = #{sort,jdbcType=INTEGER},
+			</if>
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="parent != null and parent.id != null and parent.id != ''">
+				PARENT_ID = #{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="parentIds != null">
+				PARENT_IDS = #{parentIds,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="delete">
+		update sys_leader
+		<set>
+
+			<if test="createBy != null and createBy.id != null and createBy.id != ''">
+				CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+
+			CHANGE_REASON = '1'
+
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>

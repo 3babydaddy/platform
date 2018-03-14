@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.business.ywgl.dao.YearTaskTableDao">
+ <resultMap id="BaseResultMap" type="com.tfkj.business.ywgl.entity.YearTaskTableData">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="RELATE_IDS" jdbcType="VARCHAR" property="relateIds" />
+    <result column="ROW_NUM" jdbcType="VARCHAR" property="rowNum" />
+    <result column="SORT" jdbcType="VARCHAR" property="sort" />
+    <result column="TASK_YEAR" jdbcType="VARCHAR" property="taskYear" />
+    <result column="TARGET_TASK" jdbcType="VARCHAR" property="targetTask" />
+    <result column="LEAD_OFFICE_IDS" jdbcType="VARCHAR" property="leadOfficeIds" />
+    <result column="LEAD_OFFICE_CHARGE_PERSONS" jdbcType="VARCHAR" property="leadOfficeChargePersons" />
+    <result column="LEAD_OFFICE_NAMES" jdbcType="VARCHAR" property="leadOfficeNames" />
+    <result column="DUTY_OFFICE_IDS" jdbcType="VARCHAR" property="dutyOfficeIds" />
+    <result column="DUTY_OFFICE_CHARGE_PERSONS" jdbcType="VARCHAR" property="dutyOfficeChargePersons" />
+    <result column="DUTY_OFFICE_NAMES" jdbcType="VARCHAR" property="dutyOfficeNames" />
+    <result column="CHARGE_OFFICE_IDS" jdbcType="VARCHAR" property="chargeOfficeIds" />
+    <result column="CHARGE_OFFICE_CHARGE_PERSONS" jdbcType="VARCHAR" property="chargeOfficeChargePersons" />
+    <result column="CHARGE_OFFICE_NAMES" jdbcType="VARCHAR" property="chargeOfficeNames" />
+    <result column="TASK_STATE" jdbcType="VARCHAR" property="taskState" />
+    <result column="RELATE_TASK_STATE" jdbcType="VARCHAR" property="relateTaskState" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+     <collection property="relateTaskList" ofType="com.tfkj.business.ywgl.entity.YearTaskTableElement" >
+        <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+    <result column="COLUMN_NUM" jdbcType="VARCHAR" property="columnNum" />
+    <result column="SORT" jdbcType="VARCHAR" property="sort" />
+    <result column="TASK_YEAR" jdbcType="VARCHAR" property="taskYear" />
+    <result column="TARGET_TASK" jdbcType="VARCHAR" property="targetTask" />
+    <result column="LEAD_OFFICE_IDS" jdbcType="VARCHAR" property="leadOfficeIds" />
+    <result column="DUTY_OFFICE_IDS" jdbcType="VARCHAR" property="dutyOfficeIds" />
+    <result column="CHARGE_OFFICE_IDS" jdbcType="VARCHAR" property="chargeOfficeIds" />
+    <result column="TASK_STATE" jdbcType="VARCHAR" property="taskState" />
+    <result column="TASK_QUARTER" jdbcType="VARCHAR" property="taskQuarter" />
+    <result column="TASK_EXECUTION" jdbcType="VARCHAR" property="taskExecution" />
+    <result column="TASK_PLAN" jdbcType="VARCHAR" property="taskPlan" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+	      <collection property="dutyOfficeList" ofType="com.tfkj.business.ywgl.entity.TableOfficeElement" >
+	       <id column="officeId" jdbcType="VARCHAR" property="id" />
+	        <result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+	        <result column="OFFICE_ID" jdbcType="VARCHAR" property="office.id" />
+	        <result column="OFFICE_NAME" jdbcType="VARCHAR" property="office.name" />
+	        <result column="CHARGE_PERSON" jdbcType="VARCHAR" property="chargePerson" />
+	        <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+	        <result column="officeSort" jdbcType="VARCHAR" property="sort" />
+	        <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+	        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+	        <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+	        <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+	        <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+	        <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+	    </collection>
+	 </collection>
+  </resultMap>
+	<sql id="Base_Column_List">
+    ID, RELATE_IDS, ROW_NUM, SORT, TASK_YEAR, TARGET_TASK, LEAD_OFFICE_IDS, LEAD_OFFICE_CHARGE_PERSONS, 
+    LEAD_OFFICE_NAMES, DUTY_OFFICE_IDS, DUTY_OFFICE_CHARGE_PERSONS, DUTY_OFFICE_NAMES, 
+    CHARGE_OFFICE_IDS, CHARGE_OFFICE_CHARGE_PERSONS, CHARGE_OFFICE_NAMES, TASK_STATE, 
+    RELATE_TASK_STATE, CREATE_BY, CREATE_DATE, UPDATE_BY, UPDATE_DATE, REMARKS, DEL_FLAG 
+    DEL_FLAG
+	</sql>
+	<sql id="Base_Column_Data">
+    data.ID,data. RELATE_IDS,data. ROW_NUM,data. SORT,data. TASK_YEAR,data. TARGET_TASK,data. LEAD_OFFICE_IDS,data. LEAD_OFFICE_CHARGE_PERSONS,data. 
+	LEAD_OFFICE_NAMES,data. DUTY_OFFICE_IDS,data. DUTY_OFFICE_CHARGE_PERSONS,data. DUTY_OFFICE_NAMES,data. 
+	CHARGE_OFFICE_IDS,data. CHARGE_OFFICE_CHARGE_PERSONS,data. CHARGE_OFFICE_NAMES,data. TASK_STATE,data. 
+	RELATE_TASK_STATE,data. CREATE_BY,data. CREATE_DATE,data. UPDATE_BY,data. UPDATE_DATE,data. REMARKS,data. DEL_FLAG
+	</sql>
+	<sql id="Base_Column_Element">
+    ele.ID,ele.data_ID,ele. COLUMN_NUM,ele. SORT,ele. TASK_YEAR,ele. TARGET_TASK,ele. LEAD_OFFICE_IDS,ele. DUTY_OFFICE_IDS,ele. 
+	CHARGE_OFFICE_IDS,ele. TASK_STATE,ele. TASK_QUARTER,ele. TASK_EXECUTION,ele. TASK_PLAN,ele. CREATE_BY,ele. 
+	CREATE_DATE,ele. UPDATE_BY,ele. UPDATE_DATE,ele. REMARKS,ele. DEL_FLAG
+	</sql>
+	<sql id="Base_Column_Office">
+     office.ID, office.DATA_ID, office.OFFICE_ID, office.OFFICE_NAME, office.CHARGE_PERSON, office.FILE_PATH, office.SORT, office.CREATE_BY, office.CREATE_DATE,
+    office.UPDATE_BY, office.UPDATE_DATE, office.REMARKS, office.DEL_FLAG
+	</sql>
+	<select id="get"  resultMap="BaseResultMap">
+    
+    select 
+		<include refid="Base_Column_List" />
+    from ywgl_year_task_data
+    where ID = #{id,jdbcType=VARCHAR}
+    and DEL_FLAG = '0'
+	</select>
+  
+	<select id="findList"  resultMap="BaseResultMap">
+    
+    select 
+		<include refid="Base_Column_List" />
+    from ywgl_year_task_data
+    where DEL_FLAG = '0'
+	</select>
+   
+	<!-- 用于前台显示 -->
+	<select id="findElementListByDataIds"  resultMap="BaseResultMap">
+    select
+		<include refid="Base_Column_Data"/>
+    	,
+		<include refid="Base_Column_Element" />
+		,
+		<include refid="Base_Column_Office" />
+    from ywgl_year_task_data data
+    left join ywgl_year_task_element ele on data.id=ele.DATA_ID
+    left join ywgl_table_office_element office on ele.id=office.DATA_ID
+    where data.DEL_FLAG='0' and data.id in (${ids}) order by data.UPDATE_DATE desc
+	</select>
+	<insert id="insert">
+    
+    insert into ywgl_year_task_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+        ID,
+			</if>
+			<if test="relateIds != null">
+        RELATE_IDS,
+			</if>
+			<if test="rowNum != null">
+        ROW_NUM,
+			</if>
+			<if test="sort != null">
+        SORT,
+			</if>
+			<if test="taskYear != null">
+        TASK_YEAR,
+			</if>
+			<if test="targetTask != null">
+        TARGET_TASK,
+			</if>
+			<if test="leadOfficeIds != null">
+        LEAD_OFFICE_IDS,
+			</if>
+			<if test="leadOfficeChargePersons != null">
+        LEAD_OFFICE_CHARGE_PERSONS,
+			</if>
+			<if test="leadOfficeNames != null">
+        LEAD_OFFICE_NAMES,
+			</if>
+			<if test="dutyOfficeIds != null">
+        DUTY_OFFICE_IDS,
+			</if>
+			<if test="dutyOfficeChargePersons != null">
+        DUTY_OFFICE_CHARGE_PERSONS,
+			</if>
+			<if test="dutyOfficeNames != null">
+        DUTY_OFFICE_NAMES,
+			</if>
+			<if test="chargeOfficeIds != null">
+        CHARGE_OFFICE_IDS,
+			</if>
+			<if test="chargeOfficeChargePersons != null">
+        CHARGE_OFFICE_CHARGE_PERSONS,
+			</if>
+			<if test="chargeOfficeNames != null">
+        CHARGE_OFFICE_NAMES,
+			</if>
+			<if test="taskState != null">
+        TASK_STATE,
+			</if>
+			<if test="relateTaskState != null">
+        RELATE_TASK_STATE,
+			</if>
+			<if test="createBy != null">
+        CREATE_BY,
+			</if>
+			<if test="createDate != null">
+        CREATE_DATE,
+			</if>
+			<if test="updateBy != null">
+        UPDATE_BY,
+			</if>
+			<if test="updateDate != null">
+        UPDATE_DATE,
+			</if>
+			<if test="remarks != null">
+        REMARKS,
+			</if>
+			<if test="delFlag != null">
+        DEL_FLAG,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+        #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="relateIds != null">
+        #{relateIds,jdbcType=VARCHAR},
+			</if>
+			<if test="rowNum != null">
+        #{rowNum,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+        #{sort,jdbcType=VARCHAR},
+			</if>
+			<if test="taskYear != null">
+        #{taskYear,jdbcType=VARCHAR},
+			</if>
+			<if test="targetTask != null">
+        #{targetTask,jdbcType=VARCHAR},
+			</if>
+			<if test="leadOfficeIds != null">
+        #{leadOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="leadOfficeChargePersons != null">
+        #{leadOfficeChargePersons,jdbcType=VARCHAR},
+			</if>
+			<if test="leadOfficeNames != null">
+        #{leadOfficeNames,jdbcType=VARCHAR},
+			</if>
+			<if test="dutyOfficeIds != null">
+        #{dutyOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="dutyOfficeChargePersons != null">
+        #{dutyOfficeChargePersons,jdbcType=VARCHAR},
+			</if>
+			<if test="dutyOfficeNames != null">
+        #{dutyOfficeNames,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeOfficeIds != null">
+        #{chargeOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeOfficeChargePersons != null">
+        #{chargeOfficeChargePersons,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeOfficeNames != null">
+        #{chargeOfficeNames,jdbcType=VARCHAR},
+			</if>
+			<if test="taskState != null">
+        #{taskState,jdbcType=VARCHAR},
+			</if>
+			<if test="relateTaskState != null">
+        #{relateTaskState,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+        #{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+        #{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update">
+    
+    update ywgl_year_task_data
+		<set>
+			<if test="relateIds != null">
+        RELATE_IDS = #{relateIds,jdbcType=VARCHAR},
+			</if>
+			<if test="rowNum != null">
+        ROW_NUM = #{rowNum,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+        SORT = #{sort,jdbcType=VARCHAR},
+			</if>
+			<if test="taskYear != null">
+        TASK_YEAR = #{taskYear,jdbcType=VARCHAR},
+			</if>
+			<if test="targetTask != null">
+        TARGET_TASK = #{targetTask,jdbcType=VARCHAR},
+			</if>
+			<if test="leadOfficeIds != null">
+        LEAD_OFFICE_IDS = #{leadOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="leadOfficeChargePersons != null">
+        LEAD_OFFICE_CHARGE_PERSONS = #{leadOfficeChargePersons,jdbcType=VARCHAR},
+			</if>
+			<if test="leadOfficeNames != null">
+        LEAD_OFFICE_NAMES = #{leadOfficeNames,jdbcType=VARCHAR},
+			</if>
+			<if test="dutyOfficeIds != null">
+        DUTY_OFFICE_IDS = #{dutyOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="dutyOfficeChargePersons != null">
+        DUTY_OFFICE_CHARGE_PERSONS = #{dutyOfficeChargePersons,jdbcType=VARCHAR},
+			</if>
+			<if test="dutyOfficeNames != null">
+        DUTY_OFFICE_NAMES = #{dutyOfficeNames,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeOfficeIds != null">
+        CHARGE_OFFICE_IDS = #{chargeOfficeIds,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeOfficeChargePersons != null">
+        CHARGE_OFFICE_CHARGE_PERSONS = #{chargeOfficeChargePersons,jdbcType=VARCHAR},
+			</if>
+			<if test="chargeOfficeNames != null">
+        CHARGE_OFFICE_NAMES = #{chargeOfficeNames,jdbcType=VARCHAR},
+			</if>
+			<if test="taskState != null">
+        TASK_STATE = #{taskState,jdbcType=VARCHAR},
+			</if>
+			<if test="relateTaskState != null">
+        RELATE_TASK_STATE = #{relateTaskState,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+        CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+        UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+			</if>
+		</set>
+    where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="delete">
+    
+    update ywgl_year_task_data
+		<set>
+      
+			<if test="createBy != null">
+        CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+        UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+        DEL_FLAG = '1'
+		</set>
+    where ID = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>

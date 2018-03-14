@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.framework.system.dao.OfficeDao">
+
+	<sql id="officeColumns">
+		a.id,
+		a.parent_id AS "parent.id",
+		a.parent_ids,
+		a.gfjc,
+		a.jgxz,
+		a.zzrsbm,
+		a.name,
+		a.VERSION,
+		a.sort,
+		a.remarks,
+		a.create_by AS
+		"createBy.id",
+		a.create_date,
+		a.update_by AS "updateBy.id",
+		a.update_date,
+		a.del_flag,
+		a.state_flag,
+		p.name AS "parent.name"
+	</sql>
+
+	<sql id="officeJoins">
+		LEFT JOIN sys_office p ON p.id = a.parent_id
+	</sql>
+
+	<select id="get" resultType="Office">
+		SELECT
+		<include refid="officeColumns" />
+		FROM sys_office a
+		<include refid="officeJoins" />
+		WHERE a.id = #{id}
+	</select>
+
+
+
+	<select id="findList" resultType="Office">
+		SELECT
+		<include refid="officeColumns" />
+		FROM sys_office a
+		<include refid="officeJoins" />
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		and a.PARENT_ID != '0'
+		and (a.CHANGE_REASON != '1' or a.CHANGE_REASON  is null)
+		<if test="jgxz != null and jgxz != ''">
+			AND a.jgxz = #{jgxz}
+		</if>
+		ORDER BY a.sort
+	</select>
+
+	<select id="findCxList" resultType="Office">
+		SELECT
+		<include refid="officeColumns" />
+		FROM sys_office a
+		<include refid="officeJoins" />
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		and a.PARENT_ID != '0'
+		and (a.CHANGE_REASON != '1' or a.CHANGE_REASON  is null)
+		<if test="name != null and name != ''">
+			AND a.name like CONCAT('%', #{name}, '%')
+		</if>
+		<if test="gfjc != null and gfjc != ''">
+			AND a.gfjc like CONCAT('%', #{gfjc}, '%')
+		</if>
+		
+		ORDER BY a.sort
+	</select>
+
+	<select id="findAllList" resultType="Office">
+		SELECT
+		<include refid="officeColumns" />
+		FROM sys_office a
+		<include refid="officeJoins" />
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		<![CDATA[ AND a.id <> '1']]>
+		AND a.STATE_FLAG = '1'
+		and (a.CHANGE_REASON != '1' or a.CHANGE_REASON  is null)
+		ORDER BY a.sort
+	</select>
+
+	<select id="findByParentIdsLike" resultType="Office">
+		SELECT
+		<include refid="officeColumns" />
+		FROM sys_office a
+		<include refid="officeJoins" />
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.parent_ids LIKE
+		#{parentIds}
+		ORDER BY a.sort
+	</select>
+	<insert id="insert">
+		insert into sys_office
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="parent != null and parent.id != null and parent.id != ''">
+				PARENT_ID,
+			</if>
+			<if test="parentIds != null">
+				PARENT_IDS,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="gfjc != null">
+				GFJC,
+			</if>
+			<if test="zzjgdm != null">
+				ZZJGDM,
+			</if>
+			<if test="jgxz != null">
+				JGXZ,
+			</if>
+			<if test="zzrsbm != null">
+				ZZRSBM,
+			</if>
+			<if test="stateFlag != null">
+				STATE_FLAG,
+			</if>
+			<if test="version != null">
+				VERSION,
+			</if>
+			<if test="sort != null">
+				SORT,
+			</if>
+			<if test="createBy != null">
+				CREATE_BY,
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE,
+			</if>
+			<if test="updateBy != null">
+				UPDATE_BY,
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE,
+			</if>
+			<if test="remarks != null">
+				REMARKS,
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="parent != null and parent.id != null and parent.id != ''">
+				#{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="parentIds != null">
+				#{parentIds,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="gfjc != null">
+				#{gfjc,jdbcType=VARCHAR},
+			</if>
+			<if test="zzjgdm != null">
+				#{zzjgdm,jdbcType=VARCHAR},
+			</if>
+			<if test="jgxz != null">
+				#{jgxz,jdbcType=VARCHAR},
+			</if>
+			<if test="zzrsbm != null">
+				#{zzrsbm,jdbcType=VARCHAR},
+			</if>
+			<if test="stateFlag != null">
+				#{stateFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				#{sort,jdbcType=INTEGER},
+			</if>
+			<if test="createBy != null">
+				#{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				#{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update">
+		update sys_office
+		<set>
+			<if test="parent != null and parent.id != null and parent.id != ''">
+				PARENT_ID = #{parent.id,jdbcType=VARCHAR},
+			</if>
+			<if test="parentIds != null">
+				PARENT_IDS = #{parentIds,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="gfjc != null">
+				GFJC = #{gfjc,jdbcType=VARCHAR},
+			</if>
+			<if test="zzjgdm != null">
+				ZZJGDM = #{zzjgdm,jdbcType=VARCHAR},
+			</if>
+			<if test="jgxz != null">
+				JGXZ = #{jgxz,jdbcType=VARCHAR},
+			</if>
+			<if test="zzrsbm != null">
+				ZZRSBM = #{zzrsbm,jdbcType=VARCHAR},
+			</if>
+			<if test="stateFlag != null">
+				STATE_FLAG = #{stateFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="version != null">
+				VERSION = #{version,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				SORT = #{sort,jdbcType=INTEGER},
+			</if>
+			<if test="createBy != null">
+				CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+			</if>
+			<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				REMARKS = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateParentIds">
+		UPDATE sys_office SET
+		parent_id = #{parent.id},
+		parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+
+	<update id="delete">
+		UPDATE sys_office SET
+		CHANGE_REASON = #{DEL_FLAG_DELETE}
+		
+		WHERE id = #{id} OR
+		parent_ids LIKE
+		<if test="dbName == 'oracle'">'%,'||#{id}||',%'</if>
+		<if test="dbName == 'mssql'">'%,'+#{id}+',%'</if>
+		<if test="dbName == 'mysql'">CONCAT('%,', #{id}, ',%')</if>
+	</update>
+
+	<update id="updateSort">
+		UPDATE sys_office
+		<set>
+		<if test="sort != null and sort != ''">
+			sort = #{sort},
+		</if>
+		<if test="sort == null or sort == ''">
+			sort = 0,
+		</if>
+		<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate},
+		</if>
+		<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				update_by = #{updateBy.id},
+		</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+</mapper>

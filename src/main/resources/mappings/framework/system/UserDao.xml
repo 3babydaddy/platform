@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.framework.system.dao.UserDao">
+
+
+
+    <sql id="userColumns">
+		a.id,
+		a.office_id AS "office.id",
+		a.login_name,
+		a.password,
+		a.name,
+		a.type,
+		a.login_ip,
+		a.login_date,
+		a.remarks,
+		a.state_flag as "stateFlag",
+		a.create_by AS "createBy.id",
+		a.create_date,
+		a.update_by AS "updateBy.id",
+		a.update_date,
+		a.del_flag,
+		o.name AS "office.name",
+		o.gfjc AS "office.gfjc",
+		o.parent_id AS "office.parent.id",
+		o.parent_ids AS "office.parentIds",
+		o.STATE_FLAG as "office.stateFlag"
+    </sql>
+
+    <sql id="userJoins">
+		LEFT JOIN sys_office o ON o.id = a.office_id
+    </sql>
+
+	<!-- 根据编号获得用户 -->
+	<select id="get" resultType="User">
+		SELECT
+			<include refid="userColumns"/>
+		FROM sys_user a
+		<include refid="userJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	<!-- 根据单位ID获得用户 -->
+	<select id="getByOfficeId" resultType="User">
+		SELECT
+			<include refid="userColumns"/>
+		FROM sys_user a
+		<include refid="userJoins"/>
+		WHERE a.OFFICE_ID = #{officeId}
+	</select>
+
+	<!-- 根据登录名查询用户 -->
+	<select id="getByLoginName" resultType="User" parameterType="User">
+		SELECT
+			<include refid="userColumns"/>
+		FROM sys_user a
+		<include refid="userJoins"/>
+		WHERE a.login_name = #{loginName} AND a.del_flag = #{DEL_FLAG_NORMAL}
+	</select>
+
+	<!-- 分页查询用户信息 -->
+	<select id="findList" resultType="User">
+		SELECT
+			<include refid="userColumns"/>
+		FROM sys_user a
+		<include refid="userJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+         <if test="loginName!= null and loginName != ''">
+            AND a.login_name LIKE
+            <if test="dbName == 'oracle'">'%'||#{loginName}||'%'</if>
+            <if test="dbName == 'mssql'">'%'+#{loginName}+'%'</if>
+            <if test="dbName == 'mysql'">CONCAT('%', #{loginName}, '%')</if>
+        </if>
+        <if test="name != null and name != ''">
+            AND a.name LIKE
+            <if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+            <if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+            <if test="dbName == 'mysql'">CONCAT('%', #{name}, '%')</if>
+        </if>
+        <if test="office != null and office.id != null and office.id != ''">
+            AND (o.id = #{office.id} OR o.parent_ids LIKE
+                    <if test="dbName == 'oracle'">'%,'||#{office.id}||',%')</if>
+                    <if test="dbName == 'mssql'">'%,'+#{office.id}+',%')</if>
+                    <if test="dbName == 'mysql'">CONCAT('%,', #{office.id}, ',%'))</if>
+        </if>
+		ORDER BY o.sort
+	</select>
+
+	<select id="findListByUpdateDate" resultType="User">
+		SELECT
+			<include refid="userColumns"/>
+		FROM sys_user a
+		<include refid="userJoins"/>
+		<if test="updateBeginDate != null and updateEndDate == null">
+		<![CDATA[
+			where	a.UPDATE_DATE >= #{updateBeginDate,jdbcType=TIMESTAMP}
+		]]>
+		</if>
+		<if test="updateEndDate != null and updateBeginDate == null">
+		<![CDATA[
+			where	a.UPDATE_DATE <= #{updateEndDate,jdbcType=TIMESTAMP}
+		]]>
+		</if>
+		<if test="updateEndDate != null and updateBeginDate != null">
+		<where>
+		<![CDATA[
+				a.UPDATE_DATE >= #{updateBeginDate,jdbcType=TIMESTAMP}
+			AND	a.UPDATE_DATE <= #{updateEndDate,jdbcType=TIMESTAMP}
+		]]>
+		</where>
+		</if>
+		ORDER BY o.sort
+	</select>
+
+	<!-- 根据OfficeId获取用户（树查询用户时用） -->
+	<select id="findUserByOfficeId" resultType="User" useCache="true">
+		SELECT
+			a.id, a.name, a.login_name
+		FROM sys_user a
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.office_id = #{office.id}
+		ORDER BY a.name
+	</select>
+
+	<!-- 查询全部用户 -->
+	<select id="findAllList" resultType="User">
+		SELECT
+			<include refid="userColumns"/>
+		FROM sys_user a
+		<include refid="userJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		ORDER BY o.sort, a.name
+	</select>
+
+	<!-- 查询全部用户数目 -->
+	<select id="findAllCount" resultType="long">
+		SELECT
+			COUNT(1)
+		FROM sys_user a
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+	</select>
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO sys_user(
+			id,
+			office_id,
+			login_name,
+			password,
+			name,
+			type,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			state_flag,
+			del_flag
+		) VALUES (
+			#{id},
+			#{office.id},
+			#{loginName},
+			#{password},
+			#{name},
+			#{type},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{stateFlag},
+			#{delFlag}
+		)
+	</insert>
+
+	<!-- 更新用户 -->
+	<update id="update">
+		UPDATE sys_user SET
+			office_id = #{office.id},
+			login_name = #{loginName},
+			password = #{password},
+			name = #{name},
+			type = #{type},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			state_flag = #{stateFlag}
+		WHERE id = #{id}
+	</update>
+
+	<!-- 删除用户和角色关联表数据 -->
+	<delete id="deleteRoleUser">
+		DELETE FROM sys_role_user WHERE user_id = #{id}
+	</delete>
+
+	<!-- 插入用户和角色关联表数据 -->
+	<insert id="insertRoleUser">
+		INSERT INTO sys_role_user(user_id, role_id)
+		<foreach collection="roleList" item="role" separator=" union all ">
+			SELECT #{id}, #{role.id}
+			<if test="dbName != 'mssql'">
+			FROM dual
+			</if>
+		</foreach>
+	</insert>
+
+	<!-- 更新用户信息  -->
+	<update id="updateUserInfo">
+		UPDATE sys_user SET
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+	<!-- 更新用户密码 -->
+	<update id="updatePasswordById">
+		UPDATE sys_user
+		<set>
+			password = #{password},
+		<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate},
+		</if>
+		<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				update_by = #{updateBy.id},
+		</if>
+
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<!-- 更新登录信息，如登录IP、登录时间 -->
+	<update id="updateLoginInfo">
+		UPDATE sys_user
+		<set>
+		login_ip = #{loginIp},
+		login_Date = #{loginDate},
+		<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate},
+		</if>
+		<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				update_by = #{updateBy.id},
+		</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<!-- 逻辑删除用户 -->
+	<update id="delete">
+		UPDATE sys_user
+		<set>
+			del_flag = #{DEL_FLAG_DELETE},
+		<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate},
+		</if>
+		<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				update_by = #{updateBy.id},
+		</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<update id="modifyDataForChangeReason">
+		UPDATE sys_user
+		<set>
+		<if test="updateDate != null">
+				UPDATE_DATE = #{updateDate},
+		</if>
+		<if test="updateBy != null and updateBy.id != null and updateBy.id != ''">
+				update_by = #{updateBy.id},
+		</if>
+		<if test="stateFlag != null">
+				STATE_FLAG = #{stateFlag},
+		</if>
+		<if test="changeReason != null">
+				CHANGE_REASON = #{changeReason}
+		</if>
+		</set>
+		WHERE OFFICE_ID = #{office.id}
+	</update>
+
+</mapper>

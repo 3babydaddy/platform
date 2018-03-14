@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.business.ywgl.dao.MeetingTableDataDao">
+  <resultMap id="BaseResultMap" type="com.tfkj.business.ywgl.entity.MeetingTableData">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="MEETING_TYPE" jdbcType="VARCHAR" property="meetingType" />
+    <result column="MEETING_NAME" jdbcType="VARCHAR" property="meetingName" />
+    <result column="MEETING_TIME" jdbcType="VARCHAR" property="meetingTime" />
+    <result column="SORT" jdbcType="INTEGER" property="sort" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+    <collection property="meetingTableElement" ofType="com.tfkj.business.ywgl.entity.MeetingTableElement" >
+        <id column="ele_ID" jdbcType="VARCHAR" property="id" />
+	    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+	    <result column="STATE" jdbcType="VARCHAR" property="state" />
+	    <result column="operator" jdbcType="VARCHAR" property="operator" />
+	    <result column="IS_OPERTOR_TIME" jdbcType="VARCHAR" property="isOpertorTime" />
+	    <result column="OPERTOR_TIME" jdbcType="VARCHAR" property="opertorTime" />
+	    <result column="AGREE_MATTER_NAME" jdbcType="VARCHAR" property="agreeMatterName" />
+	    <result column="LEADER" jdbcType="VARCHAR" property="leader" />
+	    <result column="ENDTIME" jdbcType="VARCHAR" property="endtime" />
+	    <result column="LIGHT_FLAG" jdbcType="VARCHAR" property="lightFlag" />
+	    <result column="RELATE_REQUEST" jdbcType="VARCHAR" property="relateRequest" />
+	    <result column="FULFILL_SITUATION" jdbcType="VARCHAR" property="fulfillSituation" />
+	    <result column="SORT" jdbcType="INTEGER" property="sort" />
+	    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+	    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+	    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+	    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+	    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+	    <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+	      <collection property="officeList" ofType="com.tfkj.business.ywgl.entity.TableOfficeElement" >
+	       <id column="officeId" jdbcType="VARCHAR" property="id" />
+	        <result column="DATA_ID" jdbcType="VARCHAR" property="dataId" />
+	        <result column="OFFICE_ID" jdbcType="VARCHAR" property="office.id" />
+	        <result column="OFFICE_NAME" jdbcType="VARCHAR" property="office.name" />
+	        <result column="CHARGE_PERSON" jdbcType="VARCHAR" property="chargePerson" />
+	        <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+	        <result column="officeSort" jdbcType="VARCHAR" property="sort" />
+	        <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy.id" />
+	        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+	        <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy.id" />
+	        <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+	        <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+	        <result column="DEL_FLAG" jdbcType="VARCHAR" property="delFlag" />
+	        <result column="A0001" jdbcType="VARCHAR" property="a0001" />
+	        <result column="A0002" jdbcType="VARCHAR" property="a0002" />
+	        <result column="A0003" jdbcType="VARCHAR" property="a0003" />
+	        <result column="A0004" jdbcType="VARCHAR" property="a0004" />
+	        <result column="A0005" jdbcType="VARCHAR" property="a0005" />
+	    </collection>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    data.ID, data.MEETING_TYPE, data.MEETING_NAME, data.MEETING_TIME, data.SORT, data.CREATE_BY, data.CREATE_DATE, data.UPDATE_BY,
+    data.UPDATE_DATE, data.REMARKS, data.DEL_FLAG
+  </sql>
+  <sql id="Base_Column_Element_get">
+    ele.ID as ele_ID, ele.PARENT_ID, ele.STATE, ele.operator, ele.IS_OPERTOR_TIME, ele.OPERTOR_TIME, ele.AGREE_MATTER_NAME,
+    ele.LEADER, ele.ENDTIME, ele.LIGHT_FLAG, ele.RELATE_REQUEST, ele.FULFILL_SITUATION, ele.SORT, ele.CREATE_BY,
+    ele.CREATE_DATE, ele.UPDATE_BY, ele.UPDATE_DATE, ele.REMARKS, ele.DEL_FLAG
+  </sql>
+ <sql id="Base_Column_Element">
+    ele.ID, data.ID as PARENT_ID, ele.STATE, ele.operator, ele.IS_OPERTOR_TIME, ele.OPERTOR_TIME, ele.AGREE_MATTER_NAME,
+    ele.LEADER, ele.ENDTIME, ele.LIGHT_FLAG, ele.RELATE_REQUEST, ele.FULFILL_SITUATION, ele.SORT, ele.CREATE_BY,
+    ele.CREATE_DATE, ele.UPDATE_BY, ele.UPDATE_DATE, ele.REMARKS, ele.DEL_FLAG,data.MEETING_TYPE MEETING_TYPE, data.MEETING_NAME MEETING_NAME, data.MEETING_TIME MEETING_TIME,data.sort as meetingSort
+  </sql>
+  <sql id="Base_Column_Offic">
+    office.ID as officeId , office.DATA_ID, office.OFFICE_ID, office.OFFICE_NAME, office.CHARGE_PERSON, office.FILE_PATH, office.SORT as officeSort, office.CREATE_BY, office.CREATE_DATE,
+    office.UPDATE_BY, office.UPDATE_DATE, office.REMARKS, office.DEL_FLAG, office.A0001, office.A0002, office.A0003, office.A0004, office.A0005
+  </sql>
+
+  <select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,
+    <include refid="Base_Column_Element_get" />,
+    <include refid="Base_Column_Offic" />
+    from ywgl_meeting_data data
+    left join ywgl_meeting_element ele on data.id=ele.PARENT_ID and ele.DEL_FLAG='0'
+    left join ywgl_table_office_element office on ele.id=office.DATA_ID and office.DEL_FLAG='0'
+    where data.ID = #{id,jdbcType=VARCHAR} and data.DEL_FLAG='0'  order by ele.SORT, office.SORT
+  </select>
+
+  <select id="findList" parameterType="com.tfkj.business.ywgl.entity.MeetingTableElement" resultType="com.tfkj.business.ywgl.entity.MeetingTableData">
+    select
+    DISTINCT(DATA .id) as ID
+    from ywgl_meeting_data data
+    left join ywgl_meeting_element ele on data.id=ele.PARENT_ID and ele.DEL_FLAG='0'
+    left join ywgl_table_office_element office on ele.id=office.DATA_ID  and office.DEL_FLAG='0'
+    where  data.DEL_FLAG='0'
+    <if test="meetingType != null and meetingType != ''">
+       and  data.MEETING_TYPE=#{meetingType}
+    </if>
+    <if test="meetingName != null and meetingName != ''">
+       and  data.MEETING_NAME like CONCAT('%',#{meetingName},'%')
+    </if>
+    <if test="meetingTimeStart != null and meetingTimeStart != ''">
+        <![CDATA[   AND DATE_FORMAT(data.MEETING_TIME, '%Y-%m-%d') >=  DATE_FORMAT(#{meetingTimeStart,jdbcType=DATE}, '%Y-%m-%d')   ]]>
+    </if>
+    <if test="meetingTimeEnd != null and meetingTimeEnd != ''">
+        <![CDATA[   AND DATE_FORMAT(data.MEETING_TIME, '%Y-%m-%d') <=  DATE_FORMAT(#{meetingTimeEnd,jdbcType=DATE}, '%Y-%m-%d')   ]]>
+    </if>
+    <if test="meetingName != null and meetingName != ''">
+       and  data.MEETING_NAME  like CONCAT('%',#{meetingName},'%')
+    </if>
+    <if test="relateRequest != null and relateRequest != ''">
+       and  ele.RELATE_REQUEST like CONCAT('%',#{relateRequest},'%')
+    </if>
+    <if test="agreeMatterName != null and agreeMatterName != ''">
+       and  ele.AGREE_MATTER_NAME like CONCAT('%',#{agreeMatterName},'%')
+    </if>
+    <if test="endtimeStart != null and endtimeStart != ''">
+        <![CDATA[   AND DATE_FORMAT(ele.ENDTIME, '%Y-%m-%d') >=  DATE_FORMAT(#{endtimeStart,jdbcType=DATE}, '%Y-%m-%d')   ]]>
+    </if>
+    <if test="endtimeEnd != null and endtimeEnd != ''">
+       <![CDATA[   AND DATE_FORMAT(ele.ENDTIME, '%Y-%m-%d') <=  DATE_FORMAT(#{endtimeEnd,jdbcType=DATE}, '%Y-%m-%d')   ]]>
+    </if>
+    <if test="fulfillSituation != null and fulfillSituation != ''">
+       and  ele.FULFILL_SITUATION like  CONCAT('%',#{fulfillSituation},'%')
+    </if>
+     <if test="state != null and state != '' ">
+       and  ele.STATE =  #{state}
+    </if>
+     <if test="leader != null and leader != ''">
+       and  ele.LEADER =  #{leader}
+    </if>
+     <if test="opertorTimeStart != null and opertorTimeStart != ''">
+     <![CDATA[   AND DATE_FORMAT(ele.OPERTOR_TIME, '%Y-%m-%d') >=  DATE_FORMAT(#{opertorTimeStart,jdbcType=DATE}, '%Y-%m-%d')   ]]>
+    </if>
+    <if test="opertorTimeEnd != null and opertorTimeEnd != ''">
+     <![CDATA[   AND DATE_FORMAT(ele.OPERTOR_TIME, '%Y-%m-%d') <=  DATE_FORMAT(#{opertorTimeEnd,jdbcType=DATE}, '%Y-%m-%d')   ]]>
+    </if>
+     <if test="officeName != null and officeName != ''">
+       and  office.OFFICE_ID like  CONCAT('%',#{officeName},'%')
+    </if>
+    <if test="year != null and year != ''">
+       and  data.MEETING_TIME like  CONCAT('%',#{year},'%')
+    </if>
+    order by data.MEETING_TIME
+  </select>
+
+   <!-- 用于前台显示 -->
+  <select id="findListElement" parameterType="com.tfkj.business.ywgl.entity.MeetingTableElement" resultMap="com.tfkj.business.ywgl.dao.MeetingTableElementDao.BaseResultMap">
+    select
+     <include refid="Base_Column_Element" />,
+     <include refid="Base_Column_Offic" />
+    from ywgl_meeting_data data
+    left join ywgl_meeting_element ele on data.id=ele.PARENT_ID and ele.DEL_FLAG='0'
+    left join ywgl_table_office_element office on ele.id=office.DATA_ID  and office.DEL_FLAG='0'
+    where data.DEL_FLAG='0' and data.id in (${meetingIds})
+     <if test="meetingType != null and meetingType != ''">
+       and  data.MEETING_TYPE=#{meetingType}
+    </if>
+    <if test="meetingName != null and meetingName != ''">
+       and  data.MEETING_NAME like CONCAT('%',#{meetingName},'%')
+    </if>
+    <if test="meetingTimeStart != null and meetingTimeStart != ''">
+        <![CDATA[   AND DATE_FORMAT(data.MEETING_TIME, '%Y-%m-%d') >=  DATE_FORMAT(#{meetingTimeStart,jdbcType=DATE}, '%Y-%m-%d')   ]]>
+    </if>
+    <if test="meetingTimeEnd != null and meetingTimeEnd != ''">
+        <![CDATA[   AND DATE_FORMAT(data.MEETING_TIME, '%Y-%m-%d') <=  DATE_FORMAT(#{meetingTimeEnd,jdbcType=DATE}, '%Y-%m-%d')   ]]>
+    </if>
+    <if test="meetingName != null and meetingName != ''">
+       and  data.MEETING_NAME  like CONCAT('%',#{meetingName},'%')
+    </if>
+    <if test="relateRequest != null and relateRequest != ''">
+       and  ele.RELATE_REQUEST like CONCAT('%',#{relateRequest},'%')
+    </if>
+    <if test="agreeMatterName != null and agreeMatterName != ''">
+       and  ele.AGREE_MATTER_NAME like CONCAT('%',#{agreeMatterName},'%')
+    </if>
+    <if test="endtimeStart != null and endtimeStart != ''">
+        <![CDATA[   AND DATE_FORMAT(ele.ENDTIME, '%Y-%m-%d %H:%i:%S') >=  DATE_FORMAT(#{endtimeStart,jdbcType=DATE}, '%Y-%m-%d %H:%i:%S')   ]]>
+    </if>
+    <if test="endtimeEnd != null and endtimeEnd != ''">
+       <![CDATA[   AND DATE_FORMAT(ele.ENDTIME, '%Y-%m-%d %H:%i:%S') <=  DATE_FORMAT(#{endtimeEnd,jdbcType=DATE}, '%Y-%m-%d %H:%i:%S')   ]]>
+    </if>
+    <if test="fulfillSituation != null and fulfillSituation != ''">
+       and  ele.FULFILL_SITUATION like  CONCAT('%',#{fulfillSituation},'%')
+    </if>
+     <if test="state != null and state != '' ">
+       and  ele.STATE =  #{state}
+    </if>
+     <if test="leader != null and leader != ''">
+       and  ele.LEADER =  #{leader}
+    </if>
+     <if test="opertorTimeStart != null and opertorTimeStart != ''">
+     <![CDATA[   AND DATE_FORMAT(ele.OPERTOR_TIME, '%Y-%m-%d') >=  DATE_FORMAT(#{opertorTimeStart,jdbcType=DATE}, '%Y-%m-%d')   ]]>
+    </if>
+    <if test="opertorTimeEnd != null and opertorTimeEnd != ''">
+     <![CDATA[   AND DATE_FORMAT(ele.OPERTOR_TIME, '%Y-%m-%d') <=  DATE_FORMAT(#{opertorTimeEnd,jdbcType=DATE}, '%Y-%m-%d')   ]]>
+    </if>
+     <if test="officeName != null and officeName != ''">
+       and  office.OFFICE_ID like  CONCAT('%',#{officeName},'%')
+    </if>
+    <if test="year != null and year != ''">
+       and  data.MEETING_TIME like  CONCAT('%',#{year},'%')
+    </if>
+    order by  data.MEETING_TIME ,ele.SORT,office.SORT
+  </select>
+
+
+  <update id="delete" parameterType="java.lang.String">
+    update ywgl_meeting_data set DEL_FLAG='1'
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="insert" parameterType="com.tfkj.business.ywgl.entity.MeetingTableData">
+    insert into ywgl_meeting_data (ID, MEETING_TYPE, MEETING_NAME,
+      MEETING_TIME, SORT, CREATE_BY,
+      CREATE_DATE, UPDATE_BY, UPDATE_DATE,
+      REMARKS, DEL_FLAG)
+    values (#{id,jdbcType=VARCHAR}, #{meetingType,jdbcType=VARCHAR}, #{meetingName,jdbcType=VARCHAR},
+      #{meetingTime,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{createBy.id,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{updateBy.id,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP},
+      #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tfkj.business.ywgl.entity.MeetingTableData">
+    insert into ywgl_meeting_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="meetingType != null">
+        MEETING_TYPE,
+      </if>
+      <if test="meetingName != null">
+        MEETING_NAME,
+      </if>
+      <if test="meetingTime != null">
+        MEETING_TIME,
+      </if>
+      <if test="sort != null">
+        SORT,
+      </if>
+      <if test="createBy.id != null">
+        CREATE_BY,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateBy.id != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingType != null">
+        #{meetingType,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingName != null">
+        #{meetingName,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingTime != null">
+        #{meetingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy.id != null">
+        #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy.id != null">
+        #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.tfkj.business.ywgl.entity.MeetingTableData">
+    update ywgl_meeting_data
+    <set>
+      <if test="meetingType != null">
+        MEETING_TYPE = #{meetingType,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingName != null">
+        MEETING_NAME = #{meetingName,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingTime != null">
+        MEETING_TIME = #{meetingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        SORT = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tfkj.business.ywgl.entity.MeetingTableData">
+    update ywgl_meeting_data
+    set MEETING_TYPE = #{meetingType,jdbcType=VARCHAR},
+      MEETING_NAME = #{meetingName,jdbcType=VARCHAR},
+      MEETING_TIME = #{meetingTime,jdbcType=VARCHAR},
+      SORT = #{sort,jdbcType=INTEGER},
+      CREATE_BY = #{createBy.id,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy.id,jdbcType=VARCHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

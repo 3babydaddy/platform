@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry location="C:\DB_Driver\mysql-connector-java-5.1.30.jar" />
+
+	<context id="my">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="false" />
+			<!-- 是否去除所有自动生成的文件的时间戳，默认为false -->
+			<property name="suppressDate" value="false" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.60.71:3306/xqdcdb_db"
+			userId="root" password="123456" />
+
+		<javaModelGenerator targetPackage="mybatisZD" targetProject="xqdcdb">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- 配置生成相应的实体Mapper.xml，对于Mapper3.X我们需要把type="XMLMAPPER" -->
+		<sqlMapGenerator targetPackage="mybatisZD" targetProject="xqdcdb">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+<!-- 配置生成相应的接口类，对应与Mapper.xml中的一系列CRUD方法SQL语句-->
+<!-- 
+		<javaClientGenerator targetPackage="mybatisZD" targetProject="xqdcdb"
+			type="XMLMAPPER">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+        <table tableName="ywgl_table_office_element" domainObjectName="TableOfficeElement" enableCountByExample="false"
+            enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table>
+        
+        <table tableName="ywgl_year_task_data" domainObjectName="YearTaskTableData" enableCountByExample="false"
+            enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table>
+    -->    
+        <table tableName="ywgl_superior_inspect" domainObjectName="ywgl_superior_inspect" enableCountByExample="false"
+            enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table>
+
+		<table tableName="sys_leader" domainObjectName="sys_leader" enableCountByExample="false"
+            enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table>
+
+
+
+	</context>
+</generatorConfiguration>

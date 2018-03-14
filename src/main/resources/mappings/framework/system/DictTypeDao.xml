@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tfkj.framework.system.dao.DictTypeDao">
+
+    <sql id="dictTypeColumns">
+        a.id,
+        a.parent_id AS "parent.id",
+        a.parent_ids,
+        a.enname,
+        a.chname,
+        a.type,
+        a.sort,
+        a.remarks,
+        a.create_by AS "createBy.id",
+        a.create_date,
+        a.update_by AS "updateBy.id",
+        a.update_date,
+        a.del_flag,
+        p.chname AS "parent.chname"
+    </sql>
+    
+    <sql id="dictTypeJoins">
+        LEFT JOIN sys_dicttype p ON p.id = a.parent_id
+    </sql>
+
+	<select id="get" resultType="DictType">
+		SELECT 
+			<include refid="dictTypeColumns"/>
+		FROM sys_dicttype a
+		    <include refid="dictTypeJoins"/>  
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="DictType">
+		SELECT 
+			<include refid="dictTypeColumns"/>
+		FROM sys_dicttype a
+		    <include refid="dictTypeJoins"/>  
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} 
+		<if test="chname != null and chname != ''">
+			AND a.chname like 
+			<if test="dbName == 'mysql'">CONCAT('%', #{chname}, '%')</if>
+		</if>
+		ORDER BY a.sort
+	</select>
+
+    <select id="findAllList" resultType="DictType">
+        SELECT
+            <include refid="dictTypeColumns"/>
+        FROM sys_dicttype a
+        <include refid="dictTypeJoins"/>
+        WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+        ORDER BY a.sort
+    </select>
+
+    <select id="findByParentIdsLike" resultType="DictType">
+        SELECT
+            <include refid="dictTypeColumns"/>
+        FROM sys_dicttype a
+        <include refid="dictTypeJoins"/>
+        WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.parent_ids LIKE #{parentIds}
+        <if test="chname != null and chname != ''">
+            AND a.chname like 
+            <if test="dbName == 'mysql'">CONCAT('%', #{chname}, '%')</if>
+        </if>
+        ORDER BY a.sort
+    </select>
+
+	<insert id="insert">
+		INSERT INTO sys_dicttype(
+			id, 
+			parent_id, 
+			parent_ids, 
+			enname, 
+			chname, 
+			type, 
+			sort, 
+			create_by, 
+			create_date, 
+			update_by, 
+			update_date, 
+			remarks, 
+			del_flag
+		) VALUES (
+			#{id}, 
+			#{parentId}, 
+			#{parentIds}, 
+			#{enname}, 
+			#{chname}, 
+			#{type}, 
+			#{sort}, 
+			#{createBy.id}, 
+			#{createDate}, 
+			#{updateBy.id}, 
+			#{updateDate}, 
+			#{remarks}, 
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_dicttype SET 
+			parent_id = #{parentId}, 
+			parent_ids = #{parentIds}, 
+			enname = #{enname}, 
+			chname = #{chname}, 
+			type = #{type}, 
+			sort = #{sort}, 
+			update_by = #{updateBy.id}, 
+			update_date = #{updateDate}, 
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+	<update id="updateParentIds">
+		UPDATE sys_dicttype SET
+		parent_id = #{parent.id},
+		parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+    
+	<update id="delete">
+		UPDATE sys_dicttype SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
