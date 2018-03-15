@@ -261,7 +261,6 @@ public class UserUtils {
 	public static Subject getSubject() {
 		try {
 			Subject subject = SecurityUtils.getSubject();
-
 			if (subject != null) {
 				return subject;
 			}

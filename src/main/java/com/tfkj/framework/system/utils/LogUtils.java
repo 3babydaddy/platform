@@ -112,7 +112,7 @@ public class LogUtils {
 		String href = StringUtils.substringAfter(requestUri, Global.getAdminPath());
 		@SuppressWarnings("unchecked")
 		Map<String, String> menuMap = (Map<String, String>) CacheUtils.get(CACHE_MENU_NAME_PATH_MAP);
-		if (menuMap != null) {
+		if (menuMap == null) {
 			menuMap = Maps.newHashMap();
 			List<Menu> menuList = menuDao.findAllList(new Menu());
 			for (Menu menu : menuList) {
