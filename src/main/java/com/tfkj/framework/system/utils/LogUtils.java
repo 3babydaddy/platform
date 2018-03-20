@@ -61,7 +61,7 @@ public class LogUtils {
 			log.setMethod(request.getMethod());
 			log.setCreateDate(new Date());
 			// 异步保存日志
-			new SaveLogThread(log, handler, ex).start();
+			//new SaveLogThread(log, handler, ex).start();
 		}
 	}
 
